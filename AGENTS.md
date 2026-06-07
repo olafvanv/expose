@@ -10,7 +10,7 @@ Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht 
 
 - Angular 21
 - Nx
-- SCSS + tailwind css
+- SCSS
 - Vitest voor tests
 - IndexDB voor opslag van data (fase 1: geen backend)
 
