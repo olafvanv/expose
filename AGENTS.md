@@ -32,6 +32,7 @@ Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht 
 - Geen andere third party UI libraries, tenzij expliciet goedgekeurd
 - Altijd losse html en scss bestanden per component
 - Altijd prefix component bestanden zoals `.component.` of `.service.` etc.
+- Voor type definitions gebruik `type` in plaats van `interface`.
 
 ## Wat nog niet bestaat
 

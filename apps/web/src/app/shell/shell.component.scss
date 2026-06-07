@@ -1,3 +1,5 @@
+@use 'scss/mixins' as m;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -56,7 +58,7 @@
     color var(--transition-fast),
     background-color var(--transition-fast);
 
-  &:hover {
+  @include m.hover {
     color: var(--color-text-secondary);
     background-color: var(--color-bg-subtle);
   }
