@@ -19,6 +19,15 @@
     "paths": {
       "@expose/ui": [
         "./libs/ui/src/index.ts"
+      ],
+      "@expose/feature-sessions": [
+        "./libs/features/sessions/src/index.ts"
+      ],
+      "@expose/feature-rolls": [
+        "./libs/features/rolls/src/index.ts"
+      ],
+      "@expose/feature-settings": [
+        "./libs/features/settings/src/index.ts"
       ]
     }
   },

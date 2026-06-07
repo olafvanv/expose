@@ -1,0 +1,87 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+// =============================================================================
+// Content area
+// =============================================================================
+
+.shell__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  padding-bottom: calc(var(--space-3xl) + env(safe-area-inset-bottom));
+}
+
+// =============================================================================
+// Bottom navigation
+// =============================================================================
+
+.shell__nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+
+  display: flex;
+  align-items: stretch;
+
+  background: var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border);
+  padding-bottom: env(safe-area-inset-bottom);
+
+  // Glassmorphism op ondersteunde browsers
+  @supports (backdrop-filter: blur(1px)) {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-top: var(--glass-border);
+  }
+}
+
+.shell__nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-xs);
+
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-subtle);
+  }
+
+  &--active {
+    color: var(--color-accent);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: calc(var(--focus-ring-offset) * -1);
+  }
+}
+
+.shell__nav-icon {
+  display: flex;
+
+  svg {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+  }
+}
+
+.shell__nav-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+}

@@ -1,0 +1,13 @@
+// =============================================================================
+// @expose/ui — Design System Entry Point
+//
+// Importeer dit bestand in je app's styles.scss:
+//   @use 'libs/ui/src/index';
+//
+// Bevat:
+//   1. tokens — CSS custom properties (:root)
+//   2. base   — reset, typografie, globale element-stijlen
+// =============================================================================
+
+@forward 'scss/tokens';
+@forward 'scss/base';
