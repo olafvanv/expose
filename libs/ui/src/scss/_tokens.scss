@@ -53,37 +53,37 @@
   --color-info-dark: #1e3a8a;
 
   // ---------------------------------------------------------------------------
-  // Kleur — Semantisch (donker thema als default)
+  // Kleur — Semantisch (licht thema als default)
   // ---------------------------------------------------------------------------
 
-  --color-bg-base: var(--color-neutral-950);
-  --color-bg-elevated: var(--color-neutral-900);
-  --color-bg-overlay: var(--color-neutral-800);
-  --color-bg-subtle: var(--color-neutral-700);
+  --color-bg-base: var(--color-neutral-50);
+  --color-bg-elevated: var(--color-neutral-0);
+  --color-bg-overlay: var(--color-neutral-100);
+  --color-bg-subtle: var(--color-neutral-200);
 
-  --color-surface: var(--color-neutral-900);
-  --color-surface-raised: var(--color-neutral-800);
+  --color-surface: var(--color-neutral-0);
+  --color-surface-raised: var(--color-neutral-50);
 
-  --color-border: var(--color-neutral-700);
-  --color-border-subtle: var(--color-neutral-600);
-  --color-border-strong: var(--color-neutral-500);
+  --color-border: var(--color-neutral-200);
+  --color-border-subtle: var(--color-neutral-100);
+  --color-border-strong: var(--color-neutral-300);
 
-  --color-text-primary: var(--color-neutral-50);
-  --color-text-secondary: var(--color-neutral-300);
-  --color-text-muted: var(--color-neutral-500);
-  --color-text-disabled: var(--color-neutral-600);
-  --color-text-inverse: var(--color-neutral-950);
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-muted: var(--color-neutral-400);
+  --color-text-disabled: var(--color-neutral-300);
+  --color-text-inverse: var(--color-neutral-50);
 
   --color-accent: var(--color-brand-500);
-  --color-accent-hover: var(--color-brand-400);
-  --color-accent-active: var(--color-brand-600);
+  --color-accent-hover: var(--color-brand-600);
+  --color-accent-active: var(--color-brand-700);
   --color-accent-subtle: color-mix(
     in srgb,
-    var(--color-brand-500) 15%,
+    var(--color-brand-500) 12%,
     transparent
   );
 
-  --color-scrim: rgb(0 0 0 / 0.6);
+  --color-scrim: rgb(0 0 0 / 0.5);
 
   // ---------------------------------------------------------------------------
   // Spacing
@@ -148,19 +148,19 @@
   // Shadows
   // ---------------------------------------------------------------------------
 
-  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-sm: 0 1px 4px rgb(0 0 0 / 0.45);
-  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
-  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.55);
-  --shadow-xl: 0 16px 40px rgb(0 0 0 / 0.6);
-  --shadow-2xl: 0 24px 64px rgb(0 0 0 / 0.65);
-  --shadow-inner: inset 0 2px 4px rgb(0 0 0 / 0.4);
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-sm: 0 1px 4px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.12);
+  --shadow-xl: 0 16px 40px rgb(0 0 0 / 0.14);
+  --shadow-2xl: 0 24px 64px rgb(0 0 0 / 0.16);
+  --shadow-inner: inset 0 2px 4px rgb(0 0 0 / 0.06);
 
   // Glow — brand highlight voor focus-states en actieve elementen
   --shadow-glow-sm: 0 0 8px
-    color-mix(in srgb, var(--color-brand-500) 50%, transparent);
-  --shadow-glow-md: 0 0 16px
     color-mix(in srgb, var(--color-brand-500) 40%, transparent);
+  --shadow-glow-md: 0 0 16px
+    color-mix(in srgb, var(--color-brand-500) 30%, transparent);
 
   // ---------------------------------------------------------------------------
   // Z-index lagen
@@ -218,10 +218,10 @@
   // Glassmorphism helpers
   // ---------------------------------------------------------------------------
 
-  --glass-bg: color-mix(in srgb, var(--color-neutral-800) 60%, transparent);
+  --glass-bg: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
   --glass-blur: blur(12px);
   --glass-border: 1px solid
-    color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+    color-mix(in srgb, var(--color-neutral-950) 8%, transparent);
 
   // ---------------------------------------------------------------------------
   // Focus
@@ -259,37 +259,40 @@
 }
 
 // =============================================================================
-// Licht thema override
-// Voeg `data-theme="light"` toe op het root-element om te wisselen.
+// Donker thema override
+// Voeg `data-theme="dark"` toe op het root-element om te wisselen.
 // =============================================================================
 
-[data-theme='light'] {
-  --color-bg-base: var(--color-neutral-50);
-  --color-bg-elevated: var(--color-neutral-0);
-  --color-bg-overlay: var(--color-neutral-100);
-  --color-bg-subtle: var(--color-neutral-200);
+[data-theme='dark'] {
+  --color-bg-base: var(--color-neutral-950);
+  --color-bg-elevated: var(--color-neutral-900);
+  --color-bg-overlay: var(--color-neutral-800);
+  --color-bg-subtle: var(--color-neutral-700);
 
-  --color-surface: var(--color-neutral-0);
-  --color-surface-raised: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-raised: var(--color-neutral-800);
 
-  --color-border: var(--color-neutral-200);
-  --color-border-subtle: var(--color-neutral-100);
-  --color-border-strong: var(--color-neutral-300);
+  --color-border: var(--color-neutral-700);
+  --color-border-subtle: var(--color-neutral-600);
+  --color-border-strong: var(--color-neutral-500);
 
-  --color-text-primary: var(--color-neutral-900);
-  --color-text-secondary: var(--color-neutral-600);
-  --color-text-muted: var(--color-neutral-400);
-  --color-text-disabled: var(--color-neutral-300);
-  --color-text-inverse: var(--color-neutral-50);
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-muted: var(--color-neutral-500);
+  --color-text-disabled: var(--color-neutral-600);
+  --color-text-inverse: var(--color-neutral-950);
 
-  --glass-bg: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
+  --color-accent-hover: var(--color-brand-400);
+  --color-accent-active: var(--color-brand-600);
+
+  --glass-bg: color-mix(in srgb, var(--color-neutral-800) 60%, transparent);
   --glass-border: 1px solid
-    color-mix(in srgb, var(--color-neutral-950) 8%, transparent);
+    color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
 
-  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.06);
-  --shadow-sm: 0 1px 4px rgb(0 0 0 / 0.08);
-  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.12);
-  --shadow-xl: 0 16px 40px rgb(0 0 0 / 0.14);
-  --shadow-2xl: 0 24px 64px rgb(0 0 0 / 0.16);
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 4px rgb(0 0 0 / 0.45);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.55);
+  --shadow-xl: 0 16px 40px rgb(0 0 0 / 0.6);
+  --shadow-2xl: 0 24px 64px rgb(0 0 0 / 0.65);
 }
