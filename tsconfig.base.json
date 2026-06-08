@@ -28,6 +28,9 @@
       ],
       "@expose/feature-settings": [
         "./libs/features/settings/src/index.ts"
+      ],
+      "@expose/data-access": [
+        "./libs/data-access/src/index.ts"
       ]
     }
   },
