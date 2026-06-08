@@ -21,6 +21,13 @@ export const appRoutes: Route[] = [
         loadChildren: () =>
           import('@expose/feature-settings').then((m) => m.settingsRoutes),
       },
+      {
+        path: 'photos',
+        loadChildren: () =>
+          import('@expose/feature-photo-detail').then(
+            (m) => m.photoDetailRoutes,
+          ),
+      },
       { path: '**', redirectTo: '' },
     ],
   },
