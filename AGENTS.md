@@ -13,6 +13,7 @@ Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht 
 - SCSS
 - Vitest voor tests
 - IndexDB voor opslag van data (fase 1: geen backend)
+- Zodra er een eigen backend moet komen, dan wordt dit NestJS
 
 ## Structuur
 
@@ -26,6 +27,7 @@ Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht 
 ## Conventies
 
 - Standalone Angular componenten altijd
+- Signals gebruiken
 - Mobile first tailwind classes
 - Geen Angular Material
 - Spartan UI voor Angular componenten
@@ -33,10 +35,13 @@ Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht 
 - Altijd losse html en scss bestanden per component
 - Altijd prefix component bestanden zoals `.component.` of `.service.` etc.
 - Voor type definitions gebruik `type` in plaats van `interface`.
+- De web app bevat state management in een service met signals. Ngrx of SignalStore is voor nu nog te veel.
+- Duidelijke scheiding tussen een state service en een http service.
+- Components roepen het liefst geen http service aan, maar gaan via een state service
 
 ## Wat nog niet bestaat
 
-- `libs/*` is nog niet gemaakt
-- Er is nog geen routing aangemaakt
-- Er zijn geen datamodellen gemaakt
 - Er zijn nog geen features gebouwd
+- Er moet een state laag komen voor de web app
+- Er moeten http service(s) aangemaakt worden voor de web app
+- de data moet worden opgeslagen (in eerste instantie indexDB, later evt een eigen backend)
