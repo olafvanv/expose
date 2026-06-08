@@ -9,17 +9,19 @@
   // Gebruik bij voorkeur de semantische varianten hieronder in je componenten.
   // ---------------------------------------------------------------------------
 
-  // Brand — warm amber/oranje tint, verwijzend naar analoge fotografie
-  --color-brand-50: #fff8ec;
-  --color-brand-100: #ffefd0;
-  --color-brand-200: #ffdb9e;
-  --color-brand-300: #ffc066;
-  --color-brand-400: #ffa033;
-  --color-brand-500: #f57f17; // primaire brand kleur
-  --color-brand-600: #c96200;
-  --color-brand-700: #a14900;
-  --color-brand-800: #7a3500;
-  --color-brand-900: #542200;
+  // Brand — warm copper/sienna, verwijzend naar vintage camerabehuizingen en analoge fotografie
+  // Let op: brand-500 en lichter zijn decoratief (niet AA-toegankelijk op wit).
+  // Gebruik brand-600+ als interactieve kleur op lichte achtergronden.
+  --color-brand-50:  #fef4ee;
+  --color-brand-100: #fde6d1;
+  --color-brand-200: #fbcba3;
+  --color-brand-300: #f8a76d;
+  --color-brand-400: #f37c38;  // decoratief — niet AA op wit, wél op donker (7.7:1)
+  --color-brand-500: #d95f18;  // decoratief — niet AA op wit
+  --color-brand-600: #a84519;  // primaire accent licht thema — 5.5:1 op wit ✓ AA
+  --color-brand-700: #883514;  // hover licht thema — 7.4:1 op wit ✓ AA + AAA
+  --color-brand-800: #6a280f;
+  --color-brand-900: #53200b;
 
   // Neutrals — koele grijzen voor donkere UI
   --color-neutral-0: #ffffff;
@@ -74,12 +76,12 @@
   --color-text-disabled: var(--color-neutral-300);
   --color-text-inverse: var(--color-neutral-50);
 
-  --color-accent: var(--color-brand-500);
-  --color-accent-hover: var(--color-brand-600);
-  --color-accent-active: var(--color-brand-700);
+  --color-accent: var(--color-brand-600);         // 5.5:1 op wit ✓
+  --color-accent-hover: var(--color-brand-700);    // 7.4:1 op wit ✓
+  --color-accent-active: var(--color-brand-800);
   --color-accent-subtle: color-mix(
     in srgb,
-    var(--color-brand-500) 12%,
+    var(--color-brand-600) 12%,
     transparent
   );
 
@@ -282,8 +284,15 @@
   --color-text-disabled: var(--color-neutral-600);
   --color-text-inverse: var(--color-neutral-950);
 
-  --color-accent-hover: var(--color-brand-400);
-  --color-accent-active: var(--color-brand-600);
+  // Op donkere achtergrond zijn lichtere brand-tinten wel toegankelijk
+  --color-accent: var(--color-brand-400);          // 7.7:1 op neutral-950 ✓
+  --color-accent-hover: var(--color-brand-300);
+  --color-accent-active: var(--color-brand-500);
+  --color-accent-subtle: color-mix(
+    in srgb,
+    var(--color-brand-400) 15%,
+    transparent
+  );
 
   --glass-bg: color-mix(in srgb, var(--color-neutral-800) 60%, transparent);
   --glass-border: 1px solid
