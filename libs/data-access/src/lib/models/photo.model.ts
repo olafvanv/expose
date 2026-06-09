@@ -1,67 +1,67 @@
 import { Aperture, IsoValue, LightCondition, ShutterSpeed } from './shared.model';
 
 // =============================================================================
-// Photo — individuele opname
+// Photo — individual shot
 // =============================================================================
 
 /**
- * Een individuele opname (frame) met alle relevante camerainstellingen.
- * Dit is het kernmodel van de applicatie.
+ * An individual shot (frame) with all relevant camera settings.
+ * This is the core model of the application.
  */
 export type Photo = {
   id: string;
 
   /**
-   * Verwijzing naar de sessie waar deze opname bij hoort.
-   * Optioneel: een foto kan ook los van een sessie worden gelogd.
+   * Reference to the session this photo belongs to.
+   * Optional: a photo can also be logged independently of a session.
    */
   sessionId?: string;
 
   /**
-   * Verwijzing naar de filmrol die in de camera zat.
-   * Optioneel: een foto kan ook los van een rol worden gelogd.
+   * Reference to the film roll loaded in the camera.
+   * Optional: a photo can also be logged independently of a roll.
    */
   rollId?: string;
 
   /**
-   * Framenummer op de filmrol, bijv. 1–36.
-   * Optioneel: niet altijd bijgehouden.
+   * Frame number on the film roll, e.g. 1–36.
+   * Optional: not always tracked.
    */
   frameNumber?: number;
 
   // -------------------------------------------------------------------------
-  // Belichtingsinstellingen
+  // Exposure settings
   // -------------------------------------------------------------------------
 
-  /** Diafragma (f-stop), bijv. 2.8, 5.6, 11. */
+  /** Aperture (f-stop), e.g. 2.8, 5.6, 11. */
   aperture: Aperture;
 
-  /** Sluitertijd, bijv. '1/125', '1/60', '4', 'B'. */
+  /** Shutter speed, e.g. '1/125', '1/60', '4', 'B'. */
   shutterSpeed: ShutterSpeed;
 
   /**
-   * ISO-waarde. Kan afwijken van de box speed van de film
-   * bij push- of pull-ontwikkeling.
+   * ISO value. Can deviate from the box speed of the film
+   * in case of push or pull development.
    */
   iso: IsoValue;
 
-  /** Focusafstand in millimeter, bijv. 50, 85, 135. */
+  /** Focal length in millimeters, e.g. 50, 85, 135. */
   focalLength?: number;
 
   // -------------------------------------------------------------------------
-  // Situatie
+  // Situation
   // -------------------------------------------------------------------------
 
-  /** Lichtomstandigheden op het moment van de opname. */
+  /** Light conditions at the time of shooting. */
   lightCondition?: LightCondition;
 
-  /** Beschrijving van het onderwerp of de scène. */
+  /** Description of the subject or scene. */
   subject?: string;
 
-  /** Vrije notities, bijv. filtercorrectie, standpunt, afstand. */
+  /** Free text notes, e.g. filter compensation, viewpoint, distance. */
   notes?: string;
 
-  /** Tijdstip van de opname (ISO 8601). */
+  /** Time the photo was taken (ISO 8601). */
   takenAt: string;
 
   createdAt: string;

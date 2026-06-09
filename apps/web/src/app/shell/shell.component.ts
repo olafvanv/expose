@@ -14,9 +14,9 @@ type NavItem = {
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class ShellComponent {
-  readonly navItems: NavItem[] = [
-    { path: '/', label: 'Sessies', icon: 'camera' },
-    { path: '/rolls', label: 'Rollen', icon: 'film' },
-    { path: '/settings', label: 'Instellingen', icon: 'settings' },
+  public readonly navItems: NavItem[] = [
+    { path: '/', label: 'Sessions', icon: 'camera' },
+    { path: '/rolls', label: 'Rolls', icon: 'film' },
+    { path: '/settings', label: 'Settings', icon: 'settings' },
   ];
 }

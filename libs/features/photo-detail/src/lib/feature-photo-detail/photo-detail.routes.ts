@@ -5,12 +5,12 @@ export const photoDetailRoutes: Routes = [
   {
     path: 'new',
     component: PhotoDetailComponent,
-    title: 'Nieuwe foto',
+    title: 'New photo',
   },
   {
     path: ':id',
     component: PhotoDetailComponent,
-    title: 'Foto bewerken',
+    title: 'Edit photo',
   },
   { path: '', redirectTo: 'new', pathMatch: 'full' },
 ];

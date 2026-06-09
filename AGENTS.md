@@ -1,47 +1,51 @@
 # Expose
 
-Een (mobile-first) applicatie om te loggen welke instellingen de gebruiker heeft gebruikt per gemaakte foto met een analoge camera
-Denk hierbij aan diafragma, sluitertijd, ISO, focusafstand, lichtomstandigheden, onderwerp, etc.
+A mobile-first application for logging the settings used per photo taken with an analog camera.
+Think aperture, shutter speed, ISO, focal length, light conditions, subject, etc.
 
-Het initiele doel is om inzicht te krijgen in welke instellingen leiden tot welke resultaten.
-Later zou ik graag willen toevoegen dat je instellingen kan berekenen (wellicht met hulp van AI?) op basis van een situatieschets of een foto.
+The initial goal is to gain insight into which settings lead to which results.
+In the future I would like to add the ability to calculate settings (perhaps with the help of AI?) based on a situation description or a photo.
 
 ## Tech stack
 
 - Angular 21
 - Nx
 - SCSS
-- Vitest voor tests
-- IndexDB voor opslag van data (fase 1: geen backend)
-- Zodra er een eigen backend moet komen, dan wordt dit NestJS
+- Vitest for tests
+- IndexedDB for data storage (phase 1: no backend)
+- When a backend is needed, it will be NestJS
 
-## Structuur
+## Structure
 
-- `apps/web` - Angular frontend applicatie
-- `libs/*` - Libraries voor hergebruik van code
-  - `libs/ui` - UI componenten
-  - `libs/data-access` - Data access lagen
-  - `libs/utils` - Utility functies
-  - `libs/features` - Features van de applicatie
+- `apps/web` - Angular frontend application
+- `libs/*` - Shared libraries
+  - `libs/ui` - UI components
+  - `libs/data-access` - Data access layers
+  - `libs/utils` - Utility functions
+  - `libs/features` - Application features
 
-## Conventies
+## Conventions
 
-- Standalone Angular componenten altijd
-- Signals gebruiken
-- Mobile first tailwind classes
-- Geen Angular Material
-- Spartan UI voor Angular componenten
-- Geen andere third party UI libraries, tenzij expliciet goedgekeurd
-- Altijd losse html en scss bestanden per component
-- Altijd prefix component bestanden zoals `.component.` of `.service.` etc.
-- Voor type definitions gebruik `type` in plaats van `interface`.
-- De web app bevat state management in een service met signals. Ngrx of SignalStore is voor nu nog te veel.
-- Duidelijke scheiding tussen een state service en een http service.
-- Components roepen het liefst geen http service aan, maar gaan via een state service
+- Always use standalone Angular components
+- Use signals
+- Mobile-first CSS classes
+- No Angular Material
+- Spartan UI for Angular components
+- No other third-party UI libraries unless explicitly approved
+- Always use separate HTML and SCSS files per component
+- Always prefix component files with `.component.`, `.service.`, etc.
+- Use `type` instead of `interface` for type definitions
+- State management lives in a service using signals. NgRx or SignalStore is too much for now.
+- Clear separation between a state service and a data service
+- Components should not call data services directly — they go through a state service
+- All methods in components and services must be sorted public → protected → private
+- Every method and property in a class must have an access modifier
+- Every method in a service must have a short description (JSDoc)
+- All comments, descriptions, code, and UI text must be in English.
 
-## Wat nog niet bestaat
+## What does not exist yet
 
-- Er zijn nog geen features gebouwd
-- Er moet een state laag komen voor de web app
-- Er moeten http service(s) aangemaakt worden voor de web app
-- de data moet worden opgeslagen (in eerste instantie indexDB, later evt een eigen backend)
+- No features have been built yet
+- A state layer needs to be created for the web app
+- Data service(s) need to be created for the web app
+- Data must be persisted (initially IndexedDB, later optionally a backend)

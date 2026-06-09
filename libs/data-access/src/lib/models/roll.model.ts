@@ -1,39 +1,39 @@
 import { FilmFormat } from './shared.model';
 
 // =============================================================================
-// Roll — filmrolletje
+// Roll — film roll
 // =============================================================================
 
-/** Een filmrolletje dat in de camera wordt geladen. */
+/** A film roll loaded into the camera. */
 export type Roll = {
   id: string;
 
-  /** Merknaam van de film, bijv. 'Kodak', 'Fujifilm', 'Ilford', 'Lomography'. */
+  /** Brand of the film, e.g. 'Kodak', 'Fujifilm', 'Ilford', 'Lomography'. */
   brand: string;
 
-  /** Naam van het filmtype, bijv. 'Portra 400', 'HP5 Plus', 'Velvia 50'. */
+  /** Name of the film type, e.g. 'Portra 400', 'HP5 Plus', 'Velvia 50'. */
   name: string;
 
-  /** ISO-gevoeligheid van de film (box speed). */
+  /** ISO sensitivity of the film (box speed). */
   iso: number;
 
-  /** Filmformaat, bijv. '35mm' of '120'. Optioneel: niet altijd relevant. */
+  /** Film format, e.g. '35mm' or '120'. Optional: not always relevant. */
   format?: FilmFormat;
 
   /**
-   * Aantal frames op de rol.
-   * Gebruikelijke waarden: 12, 24, 36 (35mm) of 8, 12, 16 (120).
+   * Number of frames on the roll.
+   * Common values: 12, 24, 36 (35mm) or 8, 12, 16 (120).
    */
   frameCount: number;
 
-  /** Datum waarop de film in de camera is geladen (ISO 8601). */
+  /** Date the film was loaded into the camera (ISO 8601). */
   loadedAt?: string;
 
-  /** Datum waarop de film is ontwikkeld (ISO 8601). */
+  /** Date the film was developed (ISO 8601). */
   developedAt?: string;
 
 
-  /** Optionele notities, bijv. afwijkende ontwikkeltijd of push/pull. */
+  /** Optional notes, e.g. deviated development time or push/pull. */
   notes?: string;
 
   createdAt: string;

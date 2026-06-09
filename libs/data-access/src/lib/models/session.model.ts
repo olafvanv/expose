@@ -1,33 +1,36 @@
 import { Photo } from './photo.model';
 
 // =============================================================================
-// Session — opnamesessie
+// Session — shooting session
 // =============================================================================
 
 /**
- * Een opnamesessie: een aaneengesloten reeks opnames, doorgaans op één dag
- * en met één filmrol in de camera.
+ * A shooting session: a continuous series of shots, usually on a single day
+ * and with a single film roll loaded in the camera.
  */
 export type Session = {
   id: string;
 
-  /** Naam van de sessie */
+  /** Name of the session, e.g. 'Zeeland roadtrip' or 'Portrait Maaike'. */
   title: string;
 
-  /** Datum van de sessie (ISO 8601, alleen datum: 'YYYY-MM-DD'). */
+  /** Date of the session (ISO 8601, date only: 'YYYY-MM-DD'). */
   date: string;
 
-  /** Verwijzing naar de geladen filmrol. */
+  /** Reference to the loaded film roll. */
   rollId?: string;
 
-  /** Locatie van de sessie, bijv. 'Amsterdam, Jordaan'. */
+  /** Location of the session, e.g. 'Amsterdam, Jordaan'. */
   location?: string;
 
-  /** Vrije notities over de sessie. */
+  /** Free text notes about the session. */
   notes?: string;
 
-  /** Alle opnames die bij deze sessie horen. */
-  photos: Photo[];
+  /**
+   * Photos belonging to this session.
+   * Optional: not always loaded (lazy, via PhotoDbService).
+   */
+  photos?: Photo[];
 
   createdAt: string;
   updatedAt: string;

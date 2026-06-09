@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-/** De component werkt in twee modi op basis van de route-parameter :id. */
+/** The component operates in two modes based on the route parameter :id. */
 type PhotoDetailMode = 'create' | 'edit';
 
 @Component({
@@ -12,9 +12,9 @@ type PhotoDetailMode = 'create' | 'edit';
 export class PhotoDetailComponent {
   private readonly route = inject(ActivatedRoute);
 
-  readonly photoId = this.route.snapshot.paramMap.get('id');
+  public readonly photoId = this.route.snapshot.paramMap.get('id');
 
-  readonly mode = computed<PhotoDetailMode>(() =>
+  public readonly mode = computed<PhotoDetailMode>(() =>
     this.photoId ? 'edit' : 'create'
   );
 }

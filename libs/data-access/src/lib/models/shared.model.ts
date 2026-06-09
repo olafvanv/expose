@@ -1,35 +1,35 @@
 // =============================================================================
-// Shared primitives — gedeelde enums en utility types
+// Shared primitives — shared enums and utility types
 // =============================================================================
 
-/** Filmformaat van de camera of filmrol. */
+/** Film format of the camera or film roll. */
 export type FilmFormat = '35mm' | '120' | '4x5' | '8x10';
 
 /**
- * Sluitertijd als leesbare string.
- * Voorbeelden: '1/8000', '1/500', '1/30', '1', '4', '30', 'B'
+ * Shutter speed as a readable string.
+ * Examples: '1/8000', '1/500', '1/30', '1', '4', '30', 'B'
  */
 export type ShutterSpeed = string;
 
 /**
- * Diafragmawaarde (f-stop).
- * Standaard reeks: 1.0, 1.4, 1.8, 2, 2.8, 3.5, 4, 5.6, 8, 11, 16, 22
+ * Aperture value (f-stop).
+ * Standard series: 1.0, 1.4, 1.8, 2, 2.8, 3.5, 4, 5.6, 8, 11, 16, 22
  */
 export type Aperture = number;
 
-/** Lichtomstandigheden op het moment van de opname. */
+/** Light conditions at the time of shooting. */
 export type LightCondition =
-  | 'sunny'           // zonnig, harde schaduwen
-  | 'partly-cloudy'   // halfbewolkt
-  | 'overcast'        // bewolkt, diffuus licht
-  | 'shade'           // schaduw
-  | 'golden-hour'     // gouden uur (zonsopgang/ondergang)
-  | 'blue-hour'       // blauwe uur (schemering)
-  | 'indoor-natural'  // binnen, daglicht
-  | 'indoor-artificial' // binnen, kunstlicht
-  | 'night';          // nacht/low-light
+  | 'sunny'           // sunny, hard shadows
+  | 'partly-cloudy'   // partly cloudy
+  | 'overcast'        // overcast, diffused light
+  | 'shade'           // shade
+  | 'golden-hour'     // golden hour (sunrise/sunset)
+  | 'blue-hour'       // blue hour (twilight)
+  | 'indoor-natural'  // indoor, daylight
+  | 'indoor-artificial' // indoor, artificial light
+  | 'night';          // night/low-light
 
-/** ISO-waarde van de film of instelling op de camera. */
+/** ISO value of the film or camera setting. */
 export type IsoValue =
   | 25 | 50 | 64 | 100 | 125 | 160 | 200 | 400
   | 800 | 1600 | 3200 | 6400 | 12800;
