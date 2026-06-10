@@ -18,3 +18,8 @@ export { BaseDataService } from './lib/services/base-data.service';
 export { SessionDataService } from './lib/services/session-data.service';
 export { PhotoDataService } from './lib/services/photo-data.service';
 export { RollDataService } from './lib/services/roll-data.service';
+
+// State services
+export { RollStateService } from './lib/services/roll-state.service';
+export { SessionStateService } from './lib/services/session-state.service';
+export { PhotoStateService } from './lib/services/photo-state.service';
