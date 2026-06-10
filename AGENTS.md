@@ -30,7 +30,6 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - Use signals
 - Mobile-first CSS classes
 - No Angular Material
-- Spartan UI for Angular components
 - No other third-party UI libraries unless explicitly approved
 - Always use separate HTML and SCSS files per component
 - Always prefix component files with `.component.`, `.service.`, etc.
@@ -42,6 +41,7 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - Every method and property in a class must have an access modifier
 - Every method in a service must have a short description (JSDoc)
 - All comments, descriptions, code, and UI text must be in English.
+- You don't have to verify your changes by running the app. You can see what's going on from the terminal output.
 
 ## What does not exist yet
 

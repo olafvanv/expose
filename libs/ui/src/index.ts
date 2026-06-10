@@ -1,2 +1,4 @@
 // Public API for @expose/ui
-// Voeg hier exports toe wanneer componenten, directives of pipes worden aangemaakt.
+
+export { HeaderService } from './lib/services/header.service';
+export type { HeaderConfig, HeaderActionButton } from './lib/services/header.service';
