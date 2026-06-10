@@ -31,6 +31,35 @@
   </div>
 </header>
 
+<!-- Add Menu Overlay Backdrop -->
+@if (isAddMenuOpen()) {
+  <div class="shell__add-menu-scrim" (click)="isAddMenuOpen.set(false)" aria-hidden="true"></div>
+}
+
+<!-- Floating Quick Action Menu -->
+<div class="shell__add-menu" [class.shell__add-menu--open]="isAddMenuOpen()">
+  <button class="shell__add-menu-item" (click)="onAddOption('session')">
+    <span class="shell__add-menu-icon" aria-hidden="true">
+      <ng-icon name="lucideCamera"></ng-icon>
+    </span>
+    <span class="shell__add-menu-label">Add Session</span>
+  </button>
+  
+  <button class="shell__add-menu-item" (click)="onAddOption('roll')">
+    <span class="shell__add-menu-icon" aria-hidden="true">
+      <ng-icon name="lucideFilm"></ng-icon>
+    </span>
+    <span class="shell__add-menu-label">Add Roll</span>
+  </button>
+  
+  <button class="shell__add-menu-item" (click)="onAddOption('photo')">
+    <span class="shell__add-menu-icon" aria-hidden="true">
+      <ng-icon name="lucideImage"></ng-icon>
+    </span>
+    <span class="shell__add-menu-label">Add Photo</span>
+  </button>
+</div>
+
 <main class="shell__content">
   <router-outlet />
 </main>
@@ -48,12 +77,8 @@
     }
   </div>
 
-  <!-- Central Action Button -->
-  <button class="shell__nav-action-btn" aria-label="Add new entry" (click)="onAddClick()">
-    <span class="shell__nav-action-icon" aria-hidden="true">
-      <ng-icon name="lucidePlus"></ng-icon>
-    </span>
-  </button>
+  <!-- Spacer to hold space for the floating button -->
+  <div class="shell__nav-spacer" aria-hidden="true"></div>
 
   <!-- Right Tabs -->
   <div class="shell__nav-group">
@@ -67,3 +92,14 @@
     }
   </div>
 </nav>
+
+<!-- Central Action Button (Placed outside <nav> to escape stacking context) -->
+<button 
+  class="shell__nav-action-btn" 
+  [class.shell__nav-action-btn--active]="isAddMenuOpen()" 
+  aria-label="Add new entry" 
+  (click)="toggleAddMenu()">
+  <span class="shell__nav-action-icon" aria-hidden="true">
+    <ng-icon name="lucidePlus"></ng-icon>
+  </span>
+</button>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -66,6 +66,7 @@ export class ShellComponent {
   ];
 
   public readonly headerService = inject(HeaderService);
+  public readonly isAddMenuOpen = signal<boolean>(false);
   private readonly router = inject(Router);
   private readonly location = inject(Location);
 
@@ -77,6 +78,7 @@ export class ShellComponent {
       )
       .subscribe(() => {
         this.headerService.reset();
+        this.isAddMenuOpen.set(false); // Close menu when navigating
       });
   }
 
@@ -99,10 +101,30 @@ export class ShellComponent {
   }
 
   /**
-   * Action triggered when clicking the central "+" bottom navigation button.
-   * Will be expanded to show a quick-actions menu in the future.
+   * Toggles the state of the central expandable add menu.
    */
-  public onAddClick(): void {
-    console.log('Central "+" Quick Action button clicked!');
+  public toggleAddMenu(): void {
+    this.isAddMenuOpen.update((open) => !open);
+  }
+
+  /**
+   * Action triggered when clicking a quick-action item.
+   * Closes the menu and routes to the corresponding creation path.
+   */
+  public onAddOption(type: 'session' | 'roll' | 'photo'): void {
+    this.isAddMenuOpen.set(false);
+    switch (type) {
+      case 'photo':
+        this.router.navigate(['/photos/new']);
+        break;
+      case 'session':
+        console.log('Navigate to log new session');
+        // Will route to /sessions/new in the future
+        break;
+      case 'roll':
+        console.log('Navigate to add new film roll');
+        // Will route to /rolls/new in the future
+        break;
+    }
   }
 }
