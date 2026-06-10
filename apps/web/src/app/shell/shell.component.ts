@@ -20,6 +20,7 @@ import {
   lucideSearch,
   lucideShare2,
   lucideInfo,
+  lucideImage,
 } from '@ng-icons/lucide';
 
 type NavItem = {
@@ -49,13 +50,18 @@ type NavItem = {
       lucideSearch,
       lucideShare2,
       lucideInfo,
+      lucideImage,
     }),
   ],
 })
 export class ShellComponent {
-  public readonly navItems: NavItem[] = [
+  public readonly navItemsLeft: NavItem[] = [
     { path: '/', label: 'Sessions', icon: 'lucideCamera' },
     { path: '/rolls', label: 'Rolls', icon: 'lucideFilm' },
+  ];
+
+  public readonly navItemsRight: NavItem[] = [
+    { path: '/photos', label: 'Photos', icon: 'lucideImage' },
     { path: '/settings', label: 'Settings', icon: 'lucideSettings' },
   ];
 
@@ -90,5 +96,13 @@ export class ShellComponent {
     } else {
       this.location.back();
     }
+  }
+
+  /**
+   * Action triggered when clicking the central "+" bottom navigation button.
+   * Will be expanded to show a quick-actions menu in the future.
+   */
+  public onAddClick(): void {
+    console.log('Central "+" Quick Action button clicked!');
   }
 }

@@ -24,6 +24,18 @@ export const appRoutes: Route[] = [
       {
         path: 'photos',
         loadChildren: () =>
+          import('@expose/feature-photos').then((m) => m.photosRoutes),
+      },
+      {
+        path: 'photos/new',
+        loadChildren: () =>
+          import('@expose/feature-photo-detail').then(
+            (m) => m.photoDetailRoutes,
+          ),
+      },
+      {
+        path: 'photos/:id',
+        loadChildren: () =>
           import('@expose/feature-photo-detail').then(
             (m) => m.photoDetailRoutes,
           ),

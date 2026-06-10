@@ -10,35 +10,20 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@expose/ui": [
-        "./libs/ui/src/index.ts"
-      ],
-      "@expose/feature-sessions": [
-        "./libs/features/sessions/src/index.ts"
-      ],
-      "@expose/feature-rolls": [
-        "./libs/features/rolls/src/index.ts"
-      ],
-      "@expose/feature-settings": [
-        "./libs/features/settings/src/index.ts"
-      ],
-      "@expose/data-access": [
-        "./libs/data-access/src/index.ts"
-      ],
+      "@expose/ui": ["./libs/ui/src/index.ts"],
+      "@expose/feature-sessions": ["./libs/features/sessions/src/index.ts"],
+      "@expose/feature-rolls": ["./libs/features/rolls/src/index.ts"],
+      "@expose/feature-settings": ["./libs/features/settings/src/index.ts"],
+      "@expose/data-access": ["./libs/data-access/src/index.ts"],
       "@expose/feature-photo-detail": [
         "./libs/features/photo-detail/src/index.ts"
-      ]
+      ],
+      "@expose/feature-photos": ["./libs/features/photos/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
