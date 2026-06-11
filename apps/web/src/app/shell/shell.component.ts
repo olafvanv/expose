@@ -122,8 +122,7 @@ export class ShellComponent {
         // Will route to /sessions/new in the future
         break;
       case 'roll':
-        console.log('Navigate to add new film roll');
-        // Will route to /rolls/new in the future
+        this.router.navigate(['/rolls/new']);
         break;
     }
   }
