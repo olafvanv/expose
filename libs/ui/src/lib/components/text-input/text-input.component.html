@@ -1,0 +1,20 @@
+<div class="form-field">
+  <label [for]="computedId()" class="form-label">{{ label() }}</label>
+  <input
+    [id]="computedId()"
+    [type]="type()"
+    [formControl]="control()"
+    [placeholder]="placeholder()"
+    class="form-input"
+    [class.form-input--error]="control().touched && control().invalid" />
+  
+  @if (control().touched && control().invalid) {
+    @if (control().hasError('required')) {
+      <span class="form-error">{{ label() }} is required.</span>
+    } @else if (control().hasError('minlength')) {
+      <span class="form-error">
+        Minimum length is {{ control().errors?.['minlength']?.requiredLength }} characters.
+      </span>
+    }
+  }
+</div>

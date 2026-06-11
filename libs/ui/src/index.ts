@@ -2,3 +2,6 @@
 
 export { HeaderService } from './lib/services/header.service';
 export type { HeaderConfig, HeaderActionButton } from './lib/services/header.service';
+
+// Components
+export { TextInputComponent } from './lib/components/text-input/text-input.component';

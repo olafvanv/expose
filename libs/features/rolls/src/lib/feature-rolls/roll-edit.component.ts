@@ -1,9 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilmFormat, RollStateService } from '@expose/data-access';
-import { HeaderService } from '@expose/ui';
+import { HeaderService, TextInputComponent } from '@expose/ui';
 
 // =============================================================================
 // RollEditComponent
@@ -14,14 +20,28 @@ import { HeaderService } from '@expose/ui';
   selector: 'lib-roll-edit',
   templateUrl: './roll-edit.component.html',
   styleUrl: './roll-edit.component.scss',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TextInputComponent],
 })
 export class RollEditComponent implements OnInit {
   public rollForm!: FormGroup;
   public isEditMode = false;
   public rollId: string | null = null;
   public readonly formatOptions: FilmFormat[] = ['35mm', '120', '4x5', '8x10'];
-  public readonly isoOptions: number[] = [25, 50, 64, 100, 125, 160, 200, 400, 800, 1600, 3200, 6400];
+  public readonly isoOptions: number[] = [
+    25, 50, 64, 100, 125, 160, 200, 400, 800, 1600, 3200, 6400,
+  ];
+
+  public get brandControl(): FormControl {
+    return this.rollForm.get('brand') as FormControl;
+  }
+
+  public get nameControl(): FormControl {
+    return this.rollForm.get('name') as FormControl;
+  }
+
+  public get frameCountControl(): FormControl {
+    return this.rollForm.get('frameCount') as FormControl;
+  }
 
   private readonly _headerService = inject(HeaderService);
   private readonly _rollStateService = inject(RollStateService);
@@ -92,7 +112,9 @@ export class RollEditComponent implements OnInit {
     this.isEditMode = !!this.rollId;
 
     if (this.isEditMode && this.rollId) {
-      const existingRoll = this._rollStateService.rolls().find((r) => r.id === this.rollId);
+      const existingRoll = this._rollStateService
+        .rolls()
+        .find((r) => r.id === this.rollId);
       if (existingRoll) {
         this.rollForm.patchValue({
           brand: existingRoll.brand,

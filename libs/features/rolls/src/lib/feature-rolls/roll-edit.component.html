@@ -1,49 +1,23 @@
 <div class="roll-form-container">
   <form [formGroup]="rollForm" (ngSubmit)="onSave()" class="roll-form">
-    
+
     <!-- Brand Input -->
-    <div class="form-field">
-      <label for="brand" class="form-label">Brand</label>
-      <input
-        id="brand"
-        type="text"
-        formControlName="brand"
-        placeholder="e.g. Kodak, Fujifilm, Ilford"
-        class="form-input"
-        [class.form-input--error]="rollForm.get('brand')?.touched && rollForm.get('brand')?.invalid" />
-      @if (rollForm.get('brand')?.touched && rollForm.get('brand')?.invalid) {
-        <span class="form-error">Brand is required (min 2 characters)</span>
-      }
-    </div>
+    <lib-text-input label="Brand" [control]="brandControl" placeholder="e.g. Kodak, Fujifilm, Ilford">
+    </lib-text-input>
 
     <!-- Name/Type Input -->
-    <div class="form-field">
-      <label for="name" class="form-label">Film Name</label>
-      <input
-        id="name"
-        type="text"
-        formControlName="name"
-        placeholder="e.g. Portra 400, HP5 Plus, Gold 200"
-        class="form-input"
-        [class.form-input--error]="rollForm.get('name')?.touched && rollForm.get('name')?.invalid" />
-      @if (rollForm.get('name')?.touched && rollForm.get('name')?.invalid) {
-        <span class="form-error">Film name is required</span>
-      }
-    </div>
+    <lib-text-input label="Film Name" [control]="nameControl" placeholder="e.g. Portra 400, HP5 Plus, Gold 200">
+    </lib-text-input>
 
     <!-- Format Segmented/Radio Selection -->
     <div class="form-field">
       <span class="form-label">Film Format</span>
       <div class="format-selector">
         @for (opt of formatOptions; track opt) {
-          <label class="format-option" [class.format-option--selected]="rollForm.get('format')?.value === opt">
-            <input
-              type="radio"
-              formControlName="format"
-              [value]="opt"
-              class="sr-only" />
-            {{ opt }}
-          </label>
+        <label class="format-option" [class.format-option--selected]="rollForm.get('format')?.value === opt">
+          <input type="radio" formControlName="format" [value]="opt" class="sr-only" />
+          {{ opt }}
+        </label>
         }
       </div>
     </div>
@@ -53,42 +27,25 @@
       <div class="form-field">
         <label for="iso" class="form-label">ISO / Speed</label>
         <div class="select-wrapper">
-          <select
-            id="iso"
-            formControlName="iso"
-            class="form-select"
+          <select id="iso" formControlName="iso" class="form-select"
             [class.form-input--error]="rollForm.get('iso')?.touched && rollForm.get('iso')?.invalid">
             @for (opt of isoOptions; track opt) {
-              <option [value]="opt">ISO {{ opt }}</option>
+            <option [value]="opt">ISO {{ opt }}</option>
             }
           </select>
         </div>
       </div>
 
       <!-- Frame Count -->
-      <div class="form-field">
-        <label for="frameCount" class="form-label">Frames</label>
-        <input
-          id="frameCount"
-          type="number"
-          formControlName="frameCount"
-          min="1"
-          class="form-input"
-          [class.form-input--error]="rollForm.get('frameCount')?.touched && rollForm.get('frameCount')?.invalid" />
-        @if (rollForm.get('frameCount')?.touched && rollForm.get('frameCount')?.invalid) {
-          <span class="form-error">Must be at least 1</span>
-        }
-      </div>
+      <lib-text-input label="Frames" [control]="frameCountControl" type="number"
+        placeholder="e.g. 36">
+      </lib-text-input>
     </div>
 
     <!-- Notes Textarea -->
     <div class="form-field">
       <label for="notes" class="form-label">Notes (Optional)</label>
-      <textarea
-        id="notes"
-        formControlName="notes"
-        placeholder="e.g. Pushed +1 stop, expired in 2012"
-        rows="3"
+      <textarea id="notes" formControlName="notes" placeholder="e.g. Pushed +1 stop, expired in 2012" rows="3"
         class="form-textarea"></textarea>
     </div>
 
