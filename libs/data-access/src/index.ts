@@ -23,3 +23,5 @@ export { RollDataService } from './lib/services/roll-data.service';
 export { RollStateService } from './lib/services/roll-state.service';
 export { SessionStateService } from './lib/services/session-state.service';
 export { PhotoStateService } from './lib/services/photo-state.service';
+export { SettingsStateService } from './lib/services/settings-state.service';
+export type { AppTheme, HomePagePreference } from './lib/services/settings-state.service';

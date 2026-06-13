@@ -1,18 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
-import { NxWelcome } from './nx-welcome';
+import { SettingsStateService } from '@expose/data-access';
+import { RouterModule } from '@angular/router';
 
 describe('App', () => {
+  let settingsStateMock: any;
+
   beforeEach(async () => {
+    settingsStateMock = {
+      theme: () => 'system',
+      preferredHomePage: () => 'sessions',
+    };
+
     await TestBed.configureTestingModule({
-      imports: [App, NxWelcome],
+      imports: [App, RouterModule.forRoot([])],
+      providers: [
+        { provide: SettingsStateService, useValue: settingsStateMock },
+      ],
     }).compileComponents();
   });
 
-  it('should render title', async () => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome web');
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

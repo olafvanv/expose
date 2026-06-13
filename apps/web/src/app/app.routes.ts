@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { ShellComponent } from './shell/shell.component';
+import { homeGuard } from './guards/home.guard';
 
 export const appRoutes: Route[] = [
   {
@@ -8,6 +9,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
+        canActivate: [homeGuard],
         loadChildren: () =>
           import('@expose/feature-sessions').then((m) => m.sessionsRoutes),
       },

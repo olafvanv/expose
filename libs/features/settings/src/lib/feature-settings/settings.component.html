@@ -1,1 +1,75 @@
-<p>Instellingen</p>
+<div class="settings-container">
+  <!-- Section: Theme Selection -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">Appearance</h2>
+    <p class="settings-section__description">Choose how Expose looks on your device.</p>
+    
+    <div class="theme-grid">
+      <!-- Light Theme Card -->
+      <button 
+        type="button" 
+        class="theme-card" 
+        [class.theme-card--active]="settingsStateService.theme() === 'light'"
+        (click)="setTheme('light')"
+        aria-label="Set theme to light">
+        <div class="theme-card__icon-wrapper">
+          <ng-icon name="lucideSun" class="theme-card__icon"></ng-icon>
+        </div>
+        <span class="theme-card__label">Light</span>
+      </button>
+
+      <!-- Dark Theme Card -->
+      <button 
+        type="button" 
+        class="theme-card" 
+        [class.theme-card--active]="settingsStateService.theme() === 'dark'"
+        (click)="setTheme('dark')"
+        aria-label="Set theme to dark">
+        <div class="theme-card__icon-wrapper">
+          <ng-icon name="lucideMoon" class="theme-card__icon"></ng-icon>
+        </div>
+        <span class="theme-card__label">Dark</span>
+      </button>
+
+      <!-- System Theme Card -->
+      <button 
+        type="button" 
+        class="theme-card" 
+        [class.theme-card--active]="settingsStateService.theme() === 'system'"
+        (click)="setTheme('system')"
+        aria-label="Set theme to system">
+        <div class="theme-card__icon-wrapper">
+          <ng-icon name="lucideMonitor" class="theme-card__icon"></ng-icon>
+        </div>
+        <span class="theme-card__label">System</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Section: Navigation & Startup Preference -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">Preferences</h2>
+    <p class="settings-section__description">Configure default startup behavior.</p>
+
+    <div class="preference-form">
+      <lib-select-input
+        [control]="homePageControl"
+        label="Preferred Home Page"
+        [options]="homePageOptions"
+        id="preferred-home-page">
+      </lib-select-input>
+    </div>
+  </section>
+
+  <!-- Section: About & Metadata -->
+  <section class="settings-section settings-section--about">
+    <div class="about-card">
+      <h3 class="about-card__title">Expose</h3>
+      <p class="about-card__text">A mobile-first exposure logbook for analog photographers. Easily log aperture, shutter speed, and film settings to improve your craft.</p>
+      <div class="about-card__metadata">
+        <span class="about-card__version">Version 1.0.0</span>
+        <span class="about-card__author">Crafted with passion</span>
+      </div>
+    </div>
+  </section>
+</div>
