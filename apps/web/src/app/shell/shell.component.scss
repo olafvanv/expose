@@ -26,7 +26,7 @@
   padding-top: env(safe-area-inset-top);
 
   background: var(--color-bg-base);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .shell__header-left {
@@ -143,155 +143,69 @@
     backdrop-filter: var(--glass-blur);
     border-top: var(--glass-border);
   }
-}
 
-.shell__nav-group {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-around;
-  height: 100%;
-}
+  .nav-group {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    height: 100%;
 
-.shell__nav-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-xs);
-  border-radius: var(--radius-md);
+    .nav-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xs);
+      border-radius: var(--radius-md);
 
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition:
-    all var(--transition-fast),
-    background-color var(--transition-fast);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition:
+        all var(--transition-fast),
+        background-color var(--transition-fast);
 
-  @include m.hover {
-    color: var(--color-text-secondary);
-  }
+      @include m.hover {
+        color: var(--color-text-secondary);
+      }
 
-  &--active {
-    color: var(--color-accent);
+      &--active {
+        color: var(--color-accent);
 
-    .shell__nav-icon {
-      transform: translateY(-4px);
+        .nav-icon {
+          transform: translateY(-4px);
+        }
+      }
+
+      &:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring-color);
+        outline-offset: calc(var(--focus-ring-offset) * -1);
+      }
+
+      .nav-icon {
+        display: flex;
+        transition: transform var(--duration-normal) var(--ease-spring);
+
+        ng-icon,
+        svg {
+          width: var(--icon-size-lg);
+          height: var(--icon-size-lg);
+        }
+      }
     }
   }
 
-  &:focus-visible {
-    outline: var(--focus-ring-width) solid var(--focus-ring-color);
-    outline-offset: calc(var(--focus-ring-offset) * -1);
+  .nav-spacer {
+    width: 52px;
+    flex-shrink: 0;
   }
-}
-
-.shell__nav-icon {
-  display: flex;
-  transition: transform var(--duration-normal) var(--ease-spring);
-
-  ng-icon,
-  svg {
-    width: var(--icon-size-lg);
-    height: var(--icon-size-lg);
-  }
-}
-
-.shell__nav-spacer {
-  width: 52px;
-  flex-shrink: 0;
-}
-
-// =============================================================================
-// Quick Action Add Menu & Scrim
-// =============================================================================
-
-.shell__add-menu-scrim {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: calc(var(--z-overlay) - 1);
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-  animation: shellFadeIn var(--transition-fast) forwards;
-}
-
-.shell__add-menu {
-  position: fixed;
-  bottom: calc(72px + env(safe-area-inset-bottom) + var(--space-md));
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  z-index: var(--z-overlay);
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  align-items: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    transform var(--transition-slow) var(--ease-spring),
-    opacity var(--transition-base);
-
-  &--open {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-.shell__add-menu-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-full);
-  background: var(--color-bg-elevated);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  transition:
-    transform var(--transition-fast),
-    background-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-
-  @include m.hover {
-    background-color: var(--color-bg-subtle);
-    transform: scale(1.03);
-    box-shadow: var(--shadow-lg);
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
-}
-
-.shell__add-menu-icon {
-  display: flex;
-  color: var(--color-accent);
-
-  ng-icon,
-  svg {
-    width: var(--icon-size-md);
-    height: var(--icon-size-md);
-  }
-}
-
-.shell__add-menu-label {
-  white-space: nowrap;
 }
 
 // =============================================================================
 // Central Action Button
 // =============================================================================
 
-.shell__nav-action-btn {
+.nav-action-btn {
   position: fixed;
   bottom: calc(21px + env(safe-area-inset-bottom));
   left: 50%;
@@ -339,7 +253,7 @@
     box-shadow: var(--shadow-lg);
     border: 0;
 
-    .shell__nav-action-icon {
+    .nav-action-icon {
       transform: rotate(135deg); // Spins "+" into a clean "x"
     }
 
@@ -351,16 +265,102 @@
       transform: translateX(-50%) scale(0.95);
     }
   }
+
+  .nav-action-icon {
+    display: flex;
+    transition: transform var(--transition-base);
+
+    ng-icon,
+    svg {
+      width: var(--icon-size-lg);
+      height: var(--icon-size-lg);
+    }
+  }
 }
 
-.shell__nav-action-icon {
-  display: flex;
-  transition: transform var(--transition-base);
+// =============================================================================
+// Quick Action Add Menu & Backdrop
+// =============================================================================
 
-  ng-icon,
-  svg {
-    width: var(--icon-size-lg);
-    height: var(--icon-size-lg);
+.add-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-overlay);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  animation: shellFadeIn var(--transition-fast) forwards;
+}
+
+.nav-add-menu {
+  position: fixed;
+  bottom: calc(72px + env(safe-area-inset-bottom) + var(--space-md));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: calc(var(--z-overlay) + 1);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--transition-slow) var(--ease-spring),
+    opacity var(--transition-base);
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-add-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-full);
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    transition:
+      transform var(--transition-fast),
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    @include m.hover {
+      background-color: var(--color-bg-subtle);
+      transform: scale(1.03);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    .nav-add-menu-icon {
+      display: flex;
+      color: var(--color-accent);
+
+      ng-icon,
+      svg {
+        width: var(--icon-size-md);
+        height: var(--icon-size-md);
+      }
+    }
+
+    .nav-add-menu-label {
+      white-space: nowrap;
+    }
   }
 }
 
