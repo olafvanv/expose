@@ -28,15 +28,14 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 
 - Always use standalone Angular components
 - Use signals
-- Mobile-first CSS classes
-- No Angular Material
+- Mobile-first approach
 - No other third-party UI libraries unless explicitly approved
 - Always use separate HTML and SCSS files per component
 - Always prefix component files with `.component.`, `.service.`, etc.
 - Use `type` instead of `interface` for type definitions
 - State management lives in a service using signals. NgRx or SignalStore is too much for now.
-- Clear separation between a state service and a data service
-- Components should not call data services directly — they go through a state service
+- Clear separation between a state service and a http service
+- Components should not call http services directly — they go through a state service
 - All methods in components and services must be sorted public → protected → private
 - Every method and property in a class must have an access modifier
 - Every method in a service must have a short description (JSDoc)
@@ -45,10 +44,3 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - Private properties should start with an underscore.
 - Always nest SCSS selectors.
 - Always place private injects at the top of the class.
-
-## What does not exist yet
-
-- No features have been built yet
-- A state layer needs to be created for the web app
-- Data service(s) need to be created for the web app
-- Data must be persisted (initially IndexedDB, later optionally a backend)
