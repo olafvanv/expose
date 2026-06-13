@@ -1,27 +1,33 @@
-import { Component, inject, signal } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { HeaderService } from '@expose/ui';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
-  lucideCamera,
-  lucideFilm,
-  lucideSettings,
   lucideArrowLeft,
+  lucideCamera,
+  lucideCheck,
+  lucideEdit,
+  lucideFilm,
   lucideFilter,
+  lucideImage,
+  lucideInfo,
   lucideMoreVertical,
   lucidePlus,
-  lucideCheck,
-  lucideX,
-  lucideEdit,
-  lucideTrash,
   lucideSearch,
+  lucideSettings,
   lucideShare2,
-  lucideInfo,
-  lucideImage,
+  lucideTrash,
+  lucideX,
 } from '@ng-icons/lucide';
+import { filter } from 'rxjs';
 
 type NavItem = {
   path: string;
@@ -56,7 +62,7 @@ type NavItem = {
 })
 export class ShellComponent {
   public readonly navItemsLeft: NavItem[] = [
-    { path: '/', label: 'Sessions', icon: 'lucideCamera' },
+    { path: '/sessions', label: 'Sessions', icon: 'lucideCamera' },
     { path: '/rolls', label: 'Rolls', icon: 'lucideFilm' },
   ];
 
@@ -74,7 +80,7 @@ export class ShellComponent {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe(() => {
         this.headerService.reset();
