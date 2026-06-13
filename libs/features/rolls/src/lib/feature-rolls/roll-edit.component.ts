@@ -9,7 +9,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilmFormat, RollStateService } from '@expose/data-access';
-import { HeaderService, TextInputComponent } from '@expose/ui';
+import {
+  HeaderService,
+  TextInputComponent,
+  SelectInputComponent,
+} from '@expose/ui';
 
 // =============================================================================
 // RollEditComponent
@@ -20,9 +24,20 @@ import { HeaderService, TextInputComponent } from '@expose/ui';
   selector: 'lib-roll-edit',
   templateUrl: './roll-edit.component.html',
   styleUrl: './roll-edit.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, TextInputComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TextInputComponent,
+    SelectInputComponent,
+  ],
 })
 export class RollEditComponent implements OnInit {
+  private readonly _headerService = inject(HeaderService);
+  private readonly _rollStateService = inject(RollStateService);
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
+  private readonly _fb = inject(FormBuilder);
+
   public rollForm!: FormGroup;
   public isEditMode = false;
   public rollId: string | null = null;
@@ -30,6 +45,11 @@ export class RollEditComponent implements OnInit {
   public readonly isoOptions: number[] = [
     25, 50, 64, 100, 125, 160, 200, 400, 800, 1600, 3200, 6400,
   ];
+
+  public readonly isoSelectOptions = this.isoOptions.map((opt) => ({
+    label: `ISO ${opt}`,
+    value: opt,
+  }));
 
   public get brandControl(): FormControl {
     return this.rollForm.get('brand') as FormControl;
@@ -43,11 +63,9 @@ export class RollEditComponent implements OnInit {
     return this.rollForm.get('frameCount') as FormControl;
   }
 
-  private readonly _headerService = inject(HeaderService);
-  private readonly _rollStateService = inject(RollStateService);
-  private readonly _router = inject(Router);
-  private readonly _route = inject(ActivatedRoute);
-  private readonly _fb = inject(FormBuilder);
+  public get isoControl(): FormControl {
+    return this.rollForm.get('iso') as FormControl;
+  }
 
   // ---------------------------------------------------------------------------
   // Lifecycle Hooks

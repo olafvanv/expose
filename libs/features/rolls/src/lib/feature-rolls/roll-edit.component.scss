@@ -35,7 +35,6 @@
   color: var(--color-text-secondary);
 }
 
-.form-select,
 .form-textarea {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
@@ -45,6 +44,8 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-sizing: border-box;
+  resize: vertical;
+  min-height: 90px;
   transition:
     border-color var(--transition-fast),
     background-color var(--transition-fast),
@@ -69,36 +70,6 @@
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
     }
   }
-}
-
-.form-select {
-  appearance: none;
-  cursor: pointer;
-  padding-right: var(--space-xl);
-}
-
-// Arrow indicator for custom select wrapper
-.select-wrapper {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: var(--space-md);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--color-text-secondary);
-    pointer-events: none;
-  }
-}
-
-.form-textarea {
-  resize: vertical;
-  min-height: 90px;
 }
 
 .form-error {

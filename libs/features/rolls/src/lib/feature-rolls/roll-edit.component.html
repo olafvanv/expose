@@ -24,17 +24,11 @@
 
     <div class="form-row">
       <!-- ISO Selector -->
-      <div class="form-field">
-        <label for="iso" class="form-label">ISO / Speed</label>
-        <div class="select-wrapper">
-          <select id="iso" formControlName="iso" class="form-select"
-            [class.form-input--error]="rollForm.get('iso')?.touched && rollForm.get('iso')?.invalid">
-            @for (opt of isoOptions; track opt) {
-            <option [value]="opt">ISO {{ opt }}</option>
-            }
-          </select>
-        </div>
-      </div>
+      <lib-select-input
+        label="ISO / Speed"
+        [control]="isoControl"
+        [options]="isoSelectOptions">
+      </lib-select-input>
 
       <!-- Frame Count -->
       <lib-text-input label="Frames" [control]="frameCountControl" type="number"

@@ -43,6 +43,8 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - All comments, descriptions, code, and UI text must be in English.
 - You don't have to verify your changes by running the app and by opening a browser. You can see what's going on from the terminal output.
 - Private properties should start with an underscore.
+- Always nest SCSS selectors.
+- Always place private injects at the top of the class.
 
 ## What does not exist yet
 
