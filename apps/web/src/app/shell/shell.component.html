@@ -94,5 +94,6 @@
 
 <!-- Add Menu Overlay Backdrop -->
 @if (isAddMenuOpen()) {
-<div class="add-menu-backdrop" (click)="isAddMenuOpen.set(false)" aria-hidden="true"></div>
+<div class="add-menu-backdrop" (click)="isAddMenuOpen.set(false)" animate.leave="leaving" animate.enter="entering"
+  aria-hidden="true"></div>
 }

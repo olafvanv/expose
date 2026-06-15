@@ -291,14 +291,22 @@
   z-index: var(--z-overlay);
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(8px);
-  animation: shellFadeIn var(--transition-fast) forwards;
+  transition: opacity var(--transition-base);
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  &.leaving {
+    opacity: 0;
+  }
 }
 
 .nav-add-menu {
   position: fixed;
   bottom: calc(72px + env(safe-area-inset-bottom) + var(--space-md));
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  transform: translateX(-50%);
   z-index: calc(var(--z-overlay) + 1);
 
   display: flex;
@@ -308,14 +316,11 @@
 
   opacity: 0;
   pointer-events: none;
-  transition:
-    transform var(--transition-slow) var(--ease-spring),
-    opacity var(--transition-base);
+  transition: opacity var(--transition-base);
 
   &--open {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
   }
 
   .nav-add-menu-item {
@@ -364,7 +369,7 @@
   }
 }
 
-@keyframes shellFadeIn {
+@keyframes fade-in {
   from {
     opacity: 0;
   }
