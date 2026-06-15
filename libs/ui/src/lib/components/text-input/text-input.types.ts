@@ -5,4 +5,6 @@ export type TextInputType =
   | 'search'
   | 'tel'
   | 'url'
-  | 'number';
+  | 'number'
+  | 'date';
+

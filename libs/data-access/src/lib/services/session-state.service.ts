@@ -1,5 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { CreateSessionInput, Session, UpdateSessionInput } from '../models/session.model';
+import {
+  CreateSessionInput,
+  Session,
+  UpdateSessionInput,
+} from '../models/session.model';
 import { SessionDataService } from './session-data.service';
 
 // =============================================================================
@@ -16,9 +20,12 @@ export class SessionStateService {
   public readonly sessions = this._sessions.asReadonly();
   public readonly loading = this._loading.asReadonly();
 
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
+  /**
+   * Returns a single session by id from the currently loaded state, or undefined if not found.
+   */
+  public getById(id: string): Session | undefined {
+    return this._sessions().find((s) => s.id === id);
+  }
 
   /**
    * Loads all sessions from the database into the state.
@@ -50,12 +57,17 @@ export class SessionStateService {
   /**
    * Updates an existing session in the database and state.
    */
-  public async updateSession(id: string, input: UpdateSessionInput): Promise<Session> {
+  public async updateSession(
+    id: string,
+    input: UpdateSessionInput,
+  ): Promise<Session> {
     this._loading.set(true);
     try {
       const updatedSession = await this._sessionDataService.update(id, input);
       this._sessions.update((sessions) =>
-        sessions.map((session) => (session.id === id ? updatedSession : session))
+        sessions.map((session) =>
+          session.id === id ? updatedSession : session,
+        ),
       );
       return updatedSession;
     } finally {
@@ -71,7 +83,7 @@ export class SessionStateService {
     try {
       await this._sessionDataService.delete(id);
       this._sessions.update((sessions) =>
-        sessions.filter((session) => session.id !== id)
+        sessions.filter((session) => session.id !== id),
       );
     } finally {
       this._loading.set(false);

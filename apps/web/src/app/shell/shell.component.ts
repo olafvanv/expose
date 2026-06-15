@@ -124,8 +124,7 @@ export class ShellComponent {
         this.router.navigate(['/photos/new']);
         break;
       case 'session':
-        console.log('Navigate to log new session');
-        // Will route to /sessions/new in the future
+        this.router.navigate(['/sessions/new']);
         break;
       case 'roll':
         this.router.navigate(['/rolls/new']);

@@ -1,0 +1,52 @@
+<div class="session-form-container">
+  <form [formGroup]="sessionForm" (ngSubmit)="onSave()" class="session-form">
+
+    <!-- Title -->
+    <lib-text-input
+      label="Title"
+      [control]="titleControl"
+      placeholder="e.g. Zeeland roadtrip, Portrait Maaike">
+    </lib-text-input>
+
+    <!-- Date -->
+    <lib-text-input
+      label="Date"
+      [control]="dateControl"
+      type="date">
+    </lib-text-input>
+
+    <!-- Location (optional) -->
+    <lib-text-input
+      label="Location (Optional)"
+      [control]="locationControl"
+      placeholder="e.g. Amsterdam, Jordaan">
+    </lib-text-input>
+
+    <!-- Film Roll (optional) -->
+    @if (rollOptions.length > 0) {
+      <lib-select-input
+        label="Film Roll (Optional)"
+        [control]="rollIdControl"
+        [options]="rollOptions">
+      </lib-select-input>
+    } @else {
+      <div class="form-field">
+        <span class="form-label">Film Roll (Optional)</span>
+        <p class="form-hint">No film rolls added yet. Add one on the Rolls page first.</p>
+      </div>
+    }
+
+    <!-- Notes (optional) -->
+    <div class="form-field">
+      <label for="session-notes" class="form-label">Notes (Optional)</label>
+      <textarea
+        id="session-notes"
+        formControlName="notes"
+        placeholder="e.g. Overcast light all day, experimented with zone focusing"
+        rows="3"
+        class="form-textarea">
+      </textarea>
+    </div>
+
+  </form>
+</div>

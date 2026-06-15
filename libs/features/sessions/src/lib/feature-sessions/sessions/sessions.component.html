@@ -1,0 +1,70 @@
+<div class="sessions-container">
+  <!-- Loading state -->
+  @if (sessionStateService.loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading sessions...</p>
+    </div>
+  } @else {
+    <!-- Empty state -->
+    @if (sortedSessions().length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon-wrapper">
+          <ng-icon name="lucideCamera" class="empty-icon"></ng-icon>
+        </div>
+        <h2 class="empty-title">No sessions yet</h2>
+        <p class="empty-description">
+          Start logging your shooting sessions. Track where you shot, which film roll you used, and how many frames you captured.
+        </p>
+        <a routerLink="/sessions/new" class="btn btn--accent">
+          <ng-icon name="lucideCamera"></ng-icon>
+          New Session
+        </a>
+      </div>
+    } @else {
+      <!-- Session list -->
+      <div class="sessions-list">
+        @for (session of sortedSessions(); track session.id) {
+          <div class="session-card" (click)="onNavigate(session.id)" role="button" tabindex="0"
+            (keyup.enter)="onNavigate(session.id)" aria-label="Open session {{ session.title }}">
+
+            <div class="session-card__header">
+              <div class="session-card__title-group">
+                <h3 class="session-card__title">{{ session.title }}</h3>
+                <time class="session-card__date" [dateTime]="session.date">
+                  {{ session.date | date: 'MMM d, yyyy' }}
+                </time>
+              </div>
+
+              <div class="session-card__badges">
+                <span class="badge badge--photos">
+                  <ng-icon name="lucideImage" class="badge-icon"></ng-icon>
+                  {{ photoCountBySession().get(session.id) ?? 0 }}
+                </span>
+              </div>
+            </div>
+
+            @if (session.location) {
+              <div class="session-card__location">
+                <ng-icon name="lucideMapPin" class="location-icon"></ng-icon>
+                <span class="location-text">{{ session.location }}</span>
+              </div>
+            }
+
+            <div class="session-card__actions">
+              <button class="action-btn action-btn--edit" (click)="onEdit(session.id, $event)"
+                aria-label="Edit session">
+                <ng-icon name="lucideEdit3"></ng-icon>
+              </button>
+              <button class="action-btn action-btn--delete" (click)="onDelete(session.id, $event)"
+                aria-label="Delete session">
+                <ng-icon name="lucideTrash2"></ng-icon>
+              </button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+  }
+</div>
