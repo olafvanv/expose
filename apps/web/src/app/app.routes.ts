@@ -9,7 +9,12 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         canActivate: [homeGuard],
+        children: [],
+      },
+      {
+        path: 'sessions',
         loadChildren: () =>
           import('@expose/feature-sessions').then((m) => m.sessionsRoutes),
       },
