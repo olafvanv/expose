@@ -1,7 +1,7 @@
 {
-  "name": "ui-styles",
+  "name": "ui-components",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/styles/src",
+  "sourceRoot": "libs/ui/components/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],

@@ -10,7 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { RollStateService, SessionStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { SelectInputComponent, TextInputComponent } from '@expose/ui';
+import { SelectInputComponent, TextInputComponent } from '@expose/ui-styles';
 
 // =============================================================================
 // SessionEditComponent
