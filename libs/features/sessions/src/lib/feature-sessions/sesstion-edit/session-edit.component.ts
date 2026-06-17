@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,11 +9,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RollStateService, SessionStateService } from '@expose/data-access';
-import {
-  HeaderService,
-  SelectInputComponent,
-  TextInputComponent,
-} from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
+import { SelectInputComponent, TextInputComponent } from '@expose/ui';
 
 // =============================================================================
 // SessionEditComponent
@@ -25,7 +22,12 @@ import {
   selector: 'lib-session-edit',
   templateUrl: './session-edit.component.html',
   styleUrl: './session-edit.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, TextInputComponent, SelectInputComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TextInputComponent,
+    SelectInputComponent,
+  ],
 })
 export class SessionEditComponent implements OnInit {
   private readonly _headerService = inject(HeaderService);
@@ -96,7 +98,10 @@ export class SessionEditComponent implements OnInit {
     };
 
     if (this.isEditMode && this.sessionId) {
-      await this._sessionStateService.updateSession(this.sessionId, sessionData);
+      await this._sessionStateService.updateSession(
+        this.sessionId,
+        sessionData,
+      );
     } else {
       await this._sessionStateService.addSession(sessionData);
     }

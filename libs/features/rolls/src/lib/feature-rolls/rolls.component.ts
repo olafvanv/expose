@@ -1,10 +1,16 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RollStateService } from '@expose/data-access';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucidePlus, lucideEdit3, lucideTrash2, lucideInfo, lucideFilm } from '@ng-icons/lucide';
+import {
+  lucideEdit3,
+  lucideFilm,
+  lucideInfo,
+  lucidePlus,
+  lucideTrash2,
+} from '@ng-icons/lucide';
 
 // =============================================================================
 // RollsComponent
@@ -59,7 +65,11 @@ export class RollsComponent implements OnInit {
    */
   public async onDelete(id: string, event: MouseEvent): Promise<void> {
     event.stopPropagation();
-    if (confirm('Are you sure you want to delete this film roll? All related photos will remain but their roll reference will be cleared.')) {
+    if (
+      confirm(
+        'Are you sure you want to delete this film roll? All related photos will remain but their roll reference will be cleared.',
+      )
+    ) {
       await this.rollStateService.deleteRoll(id);
     }
   }

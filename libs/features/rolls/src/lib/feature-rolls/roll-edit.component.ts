@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,11 +9,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilmFormat, RollStateService } from '@expose/data-access';
-import {
-  HeaderService,
-  TextInputComponent,
-  SelectInputComponent,
-} from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
+import { SelectInputComponent, TextInputComponent } from '@expose/ui';
 
 // =============================================================================
 // RollEditComponent

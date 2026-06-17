@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 
 @Component({
   selector: 'lib-photos',

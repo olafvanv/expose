@@ -7,4 +7,3 @@ export type TextInputType =
   | 'url'
   | 'number'
   | 'date';
-

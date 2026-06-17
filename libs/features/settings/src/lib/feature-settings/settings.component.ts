@@ -7,7 +7,8 @@ import {
   HomePagePreference,
   SettingsStateService,
 } from '@expose/data-access';
-import { HeaderService, SelectInputComponent } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
+import { SelectInputComponent } from '@expose/ui';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
 

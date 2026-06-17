@@ -5,7 +5,8 @@
       [id]="computedId()"
       [formControl]="control()"
       class="form-select"
-      [class.form-input--error]="control().touched && control().invalid">
+      [class.form-input--error]="control().touched && control().invalid"
+    >
       @if (placeholder()) {
         <option value="" disabled selected>{{ placeholder() }}</option>
       }
@@ -18,7 +19,7 @@
       }
     </select>
   </div>
-  
+
   @if (control().touched && control().invalid) {
     @if (control().hasError('required')) {
       <span class="form-error">{{ label() }} is required.</span>

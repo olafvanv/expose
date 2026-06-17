@@ -8,7 +8,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowLeft,
@@ -71,7 +71,7 @@ export class ShellComponent {
     { path: '/settings', label: 'Settings', icon: 'lucideSettings' },
   ];
 
-  public readonly headerService = inject(HeaderService);
+  public readonly headerService: HeaderService = inject(HeaderService);
   public readonly isAddMenuOpen = signal<boolean>(false);
   private readonly router = inject(Router);
   private readonly location = inject(Location);

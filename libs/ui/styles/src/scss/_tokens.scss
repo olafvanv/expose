@@ -12,14 +12,14 @@
   // Brand — warm copper/sienna, verwijzend naar vintage camerabehuizingen en analoge fotografie
   // Let op: brand-500 en lichter zijn decoratief (niet AA-toegankelijk op wit).
   // Gebruik brand-600+ als interactieve kleur op lichte achtergronden.
-  --color-brand-50:  #fef4ee;
+  --color-brand-50: #fef4ee;
   --color-brand-100: #fde6d1;
   --color-brand-200: #fbcba3;
   --color-brand-300: #f8a76d;
-  --color-brand-400: #f37c38;  // decoratief — niet AA op wit, wél op donker (7.7:1)
-  --color-brand-500: #d95f18;  // decoratief — niet AA op wit
-  --color-brand-600: #a84519;  // primaire accent licht thema — 5.5:1 op wit ✓ AA
-  --color-brand-700: #883514;  // hover licht thema — 7.4:1 op wit ✓ AA + AAA
+  --color-brand-400: #f37c38; // decoratief — niet AA op wit, wél op donker (7.7:1)
+  --color-brand-500: #d95f18; // decoratief — niet AA op wit
+  --color-brand-600: #a84519; // primaire accent licht thema — 5.5:1 op wit ✓ AA
+  --color-brand-700: #883514; // hover licht thema — 7.4:1 op wit ✓ AA + AAA
   --color-brand-800: #6a280f;
   --color-brand-900: #53200b;
 
@@ -76,8 +76,8 @@
   --color-text-disabled: var(--color-neutral-300);
   --color-text-inverse: var(--color-neutral-50);
 
-  --color-accent: var(--color-brand-600);         // 5.5:1 op wit ✓
-  --color-accent-hover: var(--color-brand-700);    // 7.4:1 op wit ✓
+  --color-accent: var(--color-brand-600); // 5.5:1 op wit ✓
+  --color-accent-hover: var(--color-brand-700); // 7.4:1 op wit ✓
   --color-accent-active: var(--color-brand-800);
   --color-accent-subtle: color-mix(
     in srgb,
@@ -285,7 +285,7 @@
   --color-text-inverse: var(--color-neutral-950);
 
   // Op donkere achtergrond zijn lichtere brand-tinten wel toegankelijk
-  --color-accent: var(--color-brand-400);          // 7.7:1 op neutral-950 ✓
+  --color-accent: var(--color-brand-400); // 7.7:1 op neutral-950 ✓
   --color-accent-hover: var(--color-brand-300);
   --color-accent-active: var(--color-brand-500);
   --color-accent-subtle: color-mix(

@@ -21,11 +21,6 @@ export type HeaderConfig = {
   backAction?: (() => void) | null;
 };
 
-// =============================================================================
-// HeaderService
-// Manages the global top navigation header state using Signals.
-// =============================================================================
-
 @Injectable({ providedIn: 'root' })
 export class HeaderService {
   private readonly _title = signal<string>('Expose');

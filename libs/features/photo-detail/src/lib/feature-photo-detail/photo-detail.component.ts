@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 
 /** The component operates in two modes based on the route parameter :id. */
 type PhotoDetailMode = 'create' | 'edit';
@@ -17,12 +17,12 @@ export class PhotoDetailComponent implements OnInit {
   public readonly photoId = this.route.snapshot.paramMap.get('id');
 
   public readonly mode = computed<PhotoDetailMode>(() =>
-    this.photoId ? 'edit' : 'create'
+    this.photoId ? 'edit' : 'create',
   );
 
   public ngOnInit(): void {
     const title = this.mode() === 'create' ? 'New Photo' : 'Edit Photo';
-    
+
     this.headerService.setConfig({
       title,
       showBackButton: true,

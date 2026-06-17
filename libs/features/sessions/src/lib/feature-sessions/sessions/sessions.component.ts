@@ -1,8 +1,8 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PhotoStateService, SessionStateService } from '@expose/data-access';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCamera,

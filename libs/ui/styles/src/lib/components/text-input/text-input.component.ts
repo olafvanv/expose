@@ -1,5 +1,5 @@
-import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TextInputType } from './text-input.types';
 

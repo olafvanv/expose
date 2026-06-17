@@ -6,7 +6,7 @@ import {
   RollStateService,
   SessionStateService,
 } from '@expose/data-access';
-import { HeaderService } from '@expose/ui';
+import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCalendar,
