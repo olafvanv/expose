@@ -1,11 +1,16 @@
 <header class="shell__header">
   <div class="shell__header-left">
     @if (headerService.showBackButton()) {
-    <button class="shell__header-btn" (click)="onBack()" aria-label="Go back">
-      <span class="shell__header-icon" aria-hidden="true">
-        <ng-icon name="lucideArrowLeft"></ng-icon>
-      </span>
-    </button>
+      <button
+        class="shell__header-btn"
+        (click)="onBack()"
+        aria-label="Go back">
+        <span
+          class="shell__header-icon"
+          aria-hidden="true">
+          <ng-icon name="lucideArrowLeft"></ng-icon>
+        </span>
+      </button>
     }
   </div>
 
@@ -13,16 +18,22 @@
 
   <div class="shell__header-right">
     @for (btn of headerService.actionButtons(); track btn.id) {
-    <button class="shell__header-btn" [class.shell__header-btn--text]="btn.type === 'text'" (click)="btn.action()"
-      [disabled]="btn.disabled" [attr.aria-label]="btn.ariaLabel || btn.label">
-      @if (btn.type === 'icon' && btn.icon) {
-      <span class="shell__header-icon" aria-hidden="true">
-        <ng-icon [name]="btn.icon"></ng-icon>
-      </span>
-      } @else {
-      {{ btn.label }}
-      }
-    </button>
+      <button
+        class="shell__header-btn"
+        [class.shell__header-btn--text]="btn.type === 'text'"
+        (click)="btn.action()"
+        [disabled]="btn.disabled"
+        [attr.aria-label]="btn.ariaLabel || btn.label">
+        @if (btn.type === 'icon' && btn.icon) {
+          <span
+            class="shell__header-icon"
+            aria-hidden="true">
+            <ng-icon [name]="btn.icon"></ng-icon>
+          </span>
+        } @else {
+          {{ btn.label }}
+        }
+      </button>
     }
   </div>
 </header>
@@ -31,69 +42,87 @@
   <router-outlet />
 </main>
 
-<nav class="shell__nav" aria-label="Navigationbar">
+<nav
+  class="shell__nav"
+  aria-label="Navigationbar">
   <!-- Left Tabs -->
   <div class="nav-group">
     @for (item of navItemsLeft; track item.path) {
-    <a class="nav-item" [routerLink]="item.path" routerLinkActive="nav-item--active"
-      [routerLinkActiveOptions]="{ exact: item.path === '/' }" [attr.aria-label]="item.label">
-      <span class="nav-icon" aria-hidden="true">
-        <ng-icon [name]="item.icon"></ng-icon>
-      </span>
-    </a>
+      <a
+        class="nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="nav-item--active"
+        [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        [attr.aria-label]="item.label">
+        <span
+          class="nav-icon"
+          aria-hidden="true">
+          <ng-icon [name]="item.icon"></ng-icon>
+        </span>
+      </a>
     }
   </div>
 
   <!-- Spacer to hold space for the floating button -->
-  <div class="nav-spacer" aria-hidden="true"></div>
+  <div
+    class="nav-spacer"
+    aria-hidden="true"></div>
 
   <!-- Right Tabs -->
   <div class="nav-group">
     @for (item of navItemsRight; track item.path) {
-    <a class="nav-item" [routerLink]="item.path" routerLinkActive="nav-item--active"
-      [routerLinkActiveOptions]="{ exact: item.path === '/' }" [attr.aria-label]="item.label">
-      <span class="nav-icon" aria-hidden="true">
-        <ng-icon [name]="item.icon"></ng-icon>
-      </span>
-    </a>
+      <a
+        class="nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="nav-item--active"
+        [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        [attr.aria-label]="item.label">
+        <span
+          class="nav-icon"
+          aria-hidden="true">
+          <ng-icon [name]="item.icon"></ng-icon>
+        </span>
+      </a>
     }
   </div>
 </nav>
 
 <!-- Central Action Button (Placed outside <nav> to escape stacking context) -->
-<button class="nav-action-btn" [class.nav-action-btn--active]="isAddMenuOpen()" aria-label="Add new entry"
+<button
+  class="nav-action-btn"
+  [class.nav-action-btn--active]="isAddMenuOpen()"
+  aria-label="Add new entry"
   (click)="toggleAddMenu()">
-  <span class="nav-action-icon" aria-hidden="true">
+  <span
+    class="nav-action-icon"
+    aria-hidden="true">
     <ng-icon name="lucidePlus"></ng-icon>
   </span>
 </button>
 
 <!-- Floating Quick Action Menu -->
-<div class="nav-add-menu" [class.nav-add-menu--open]="isAddMenuOpen()">
-  <button class="nav-add-menu-item" (click)="onAddOption('session')">
-    <span class="nav-add-menu-icon" aria-hidden="true">
-      <ng-icon name="lucideCamera"></ng-icon>
-    </span>
-    <span class="nav-add-menu-label">Add Session</span>
-  </button>
-
-  <button class="nav-add-menu-item" (click)="onAddOption('roll')">
-    <span class="nav-add-menu-icon" aria-hidden="true">
-      <ng-icon name="lucideFilm"></ng-icon>
-    </span>
-    <span class="nav-add-menu-label">Add Roll</span>
-  </button>
-
-  <button class="nav-add-menu-item" (click)="onAddOption('photo')">
-    <span class="nav-add-menu-icon" aria-hidden="true">
-      <ng-icon name="lucideImage"></ng-icon>
-    </span>
-    <span class="nav-add-menu-label">Add Photo</span>
-  </button>
+<div
+  class="nav-add-menu"
+  [class.nav-add-menu--open]="isAddMenuOpen()">
+  @for (button of menuButtons; track $index) {
+    <button
+      class="nav-add-menu-item"
+      (click)="onAddOption(button.type)"
+      [style]="{ '--delay': $index * 100 + 'ms' }">
+      <span
+        class="nav-add-menu-icon"
+        aria-hidden="true">
+        <ng-icon [name]="button.icon"></ng-icon>
+      </span>
+      <span class="nav-add-menu-label">{{ button.label }}</span>
+    </button>
+  }
 </div>
 
 <!-- Add Menu Overlay Backdrop -->
 @if (isAddMenuOpen()) {
-<div class="add-menu-backdrop" (click)="isAddMenuOpen.set(false)" animate.leave="leaving" animate.enter="entering"
-  aria-hidden="true"></div>
+  <div
+    class="add-menu-backdrop"
+    (click)="isAddMenuOpen.set(false)"
+    aria-hidden="true"></div>
 }

@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
   NavigationEnd,
   Router,
@@ -34,6 +34,14 @@ type NavItem = {
   label: string;
   icon: string;
 };
+
+type FloatingMenuButton = {
+  icon: string;
+  label: string;
+  type: AddOptionType;
+};
+
+type AddOptionType = 'session' | 'roll' | 'photo';
 
 @Component({
   selector: 'app-shell',
@@ -69,6 +77,12 @@ export class ShellComponent {
   public readonly navItemsRight: NavItem[] = [
     { path: '/photos', label: 'Photos', icon: 'lucideImage' },
     { path: '/settings', label: 'Settings', icon: 'lucideSettings' },
+  ];
+
+  public readonly menuButtons: FloatingMenuButton[] = [
+    { label: 'Add Session', icon: 'lucideCamera', type: 'session' },
+    { label: 'Add Roll', icon: 'lucideFilm', type: 'roll' },
+    { label: 'Add Photo', icon: 'lucideImage', type: 'photo' },
   ];
 
   public readonly headerService: HeaderService = inject(HeaderService);
@@ -117,7 +131,7 @@ export class ShellComponent {
    * Action triggered when clicking a quick-action item.
    * Closes the menu and routes to the corresponding creation path.
    */
-  public onAddOption(type: 'session' | 'roll' | 'photo'): void {
+  public onAddOption(type: AddOptionType): void {
     this.isAddMenuOpen.set(false);
     switch (type) {
       case 'photo':
