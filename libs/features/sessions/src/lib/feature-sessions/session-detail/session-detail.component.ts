@@ -1,20 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  PhotoStateService,
-  RollStateService,
-  SessionStateService,
-} from '@expose/data-access';
+import { PhotoStateService, RollStateService, SessionStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  lucideCalendar,
-  lucideCamera,
-  lucideFilm,
-  lucideMapPin,
-  lucidePlus,
-} from '@ng-icons/lucide';
+import { lucideCalendar, lucideCamera, lucideFilm, lucideMapPin, lucidePlus } from '@ng-icons/lucide';
 
 // =============================================================================
 // SessionDetailComponent
@@ -48,16 +38,12 @@ export class SessionDetailComponent implements OnInit {
   private readonly _sessionId = this._route.snapshot.paramMap.get('id') ?? '';
 
   /** The session currently being viewed. */
-  public readonly session = computed(() =>
-    this._sessionStateService.getById(this._sessionId),
-  );
+  public readonly session = computed(() => this._sessionStateService.getById(this._sessionId));
 
   /** The roll linked to this session, if any. */
   public readonly roll = computed(() => {
     const rollId = this.session()?.rollId;
-    return rollId
-      ? this._rollStateService.rolls().find((r) => r.id === rollId)
-      : undefined;
+    return rollId ? this._rollStateService.rolls().find((r) => r.id === rollId) : undefined;
   });
 
   /** Photos belonging to this session, sorted by frame number then takenAt. */
@@ -70,20 +56,12 @@ export class SessionDetailComponent implements OnInit {
     }),
   );
 
-  // ---------------------------------------------------------------------------
-  // Lifecycle Hooks
-  // ---------------------------------------------------------------------------
-
   public ngOnInit(): void {
     this._sessionStateService.loadAll();
     this._rollStateService.loadAll();
     this._photoStateService.loadBySessionId(this._sessionId);
     this._setupHeader();
   }
-
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
 
   /**
    * Navigates to the add-photo page, pre-seeding the sessionId via query params.
@@ -100,10 +78,6 @@ export class SessionDetailComponent implements OnInit {
   public onEdit(): void {
     this._router.navigate(['/sessions', this._sessionId, 'edit']);
   }
-
-  // ---------------------------------------------------------------------------
-  // Private Methods
-  // ---------------------------------------------------------------------------
 
   private _setupHeader(): void {
     this._headerService.setConfig({

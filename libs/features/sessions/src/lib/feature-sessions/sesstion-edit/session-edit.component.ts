@@ -1,19 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RollStateService, SessionStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import {
-  SelectInputComponent,
-  TextInputComponent,
-} from '@expose/ui/form-controls';
+import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-controls';
 
 // =============================================================================
 // SessionEditComponent
@@ -25,12 +16,7 @@ import {
   selector: 'lib-session-edit',
   templateUrl: './session-edit.component.html',
   styleUrl: './session-edit.component.scss',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TextInputComponent,
-    SelectInputComponent,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, TextInputComponent, SelectInputComponent],
 })
 export class SessionEditComponent implements OnInit {
   private readonly _headerService = inject(HeaderService);
@@ -101,10 +87,7 @@ export class SessionEditComponent implements OnInit {
     };
 
     if (this.isEditMode && this.sessionId) {
-      await this._sessionStateService.updateSession(
-        this.sessionId,
-        sessionData,
-      );
+      await this._sessionStateService.updateSession(this.sessionId, sessionData);
     } else {
       await this._sessionStateService.addSession(sessionData);
     }
@@ -152,6 +135,7 @@ export class SessionEditComponent implements OnInit {
     this._headerService.setConfig({
       title: this.isEditMode ? 'Edit Session' : 'New Session',
       showBackButton: true,
+      backAction: () => this._router.navigate(['/sessions']),
       actionButtons: [
         {
           id: 'save-session',
