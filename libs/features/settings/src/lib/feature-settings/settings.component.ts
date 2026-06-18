@@ -8,7 +8,7 @@ import {
   SettingsStateService,
 } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { SelectInputComponent } from '@expose/ui-styles';
+import { SelectInputComponent } from '@expose/ui/form-controls';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
 

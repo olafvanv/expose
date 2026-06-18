@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { RollStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
+import { EmptyState } from '@expose/ui/empty-state';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideEdit3,
@@ -21,7 +21,7 @@ import {
   selector: 'lib-rolls',
   templateUrl: './rolls.component.html',
   styleUrl: './rolls.component.scss',
-  imports: [CommonModule, RouterLink, NgIconComponent],
+  imports: [NgIconComponent, EmptyState],
   providers: [
     provideIcons({
       lucidePlus,

@@ -10,7 +10,10 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilmFormat, RollStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { SelectInputComponent, TextInputComponent } from '@expose/ui-styles';
+import {
+  SelectInputComponent,
+  TextInputComponent,
+} from '@expose/ui/form-controls';
 
 // =============================================================================
 // RollEditComponent

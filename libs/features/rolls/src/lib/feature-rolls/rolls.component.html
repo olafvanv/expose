@@ -1,66 +1,54 @@
 <div class="rolls-container">
   <!-- Loading state -->
   @if (rollStateService.loading()) {
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>Loading film rolls...</p>
-    </div>
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading film rolls...</p>
+  </div>
   } @else {
-    <!-- Empty state -->
-    @if (rollStateService.rolls().length === 0) {
-      <div class="empty-state">
-        <div class="empty-icon-wrapper">
-          <ng-icon name="lucideFilm" class="empty-icon"></ng-icon>
+  <!-- Empty state -->
+  <div class="rolls-grid">
+    @for (roll of rollStateService.rolls(); track roll.id) {
+    <div class="roll-card">
+      <div class="roll-card__header">
+        <div class="roll-card__title-group">
+          <span class="roll-card__brand">{{ roll.brand }}</span>
+          <h3 class="roll-card__name">{{ roll.name }}</h3>
         </div>
-        <h2 class="empty-title">No film rolls logged yet</h2>
-        <p class="empty-description">
-          Keep track of your active and completed film rolls, their format, box speed, and notes.
-        </p>
-        <a routerLink="new" class="btn btn--accent">
-          <ng-icon name="lucidePlus"></ng-icon>
-          Add Film Roll
-        </a>
+        <div class="roll-card__badges">
+          <span class="badge badge--format">{{ roll.format }}</span>
+          <span class="badge badge--iso">ISO {{ roll.iso }}</span>
+        </div>
       </div>
-    } @else {
-      <!-- List of Rolls -->
-      <div class="rolls-grid">
-        @for (roll of rollStateService.rolls(); track roll.id) {
-          <div class="roll-card">
-            <div class="roll-card__header">
-              <div class="roll-card__title-group">
-                <span class="roll-card__brand">{{ roll.brand }}</span>
-                <h3 class="roll-card__name">{{ roll.name }}</h3>
-              </div>
-              <div class="roll-card__badges">
-                <span class="badge badge--format">{{ roll.format }}</span>
-                <span class="badge badge--iso">ISO {{ roll.iso }}</span>
-              </div>
-            </div>
 
-            <div class="roll-card__details">
-              <div class="detail-item">
-                <span class="detail-label">Frames:</span>
-                <span class="detail-value">{{ roll.frameCount }} exposure{{ roll.frameCount > 1 ? 's' : '' }}</span>
-              </div>
-              @if (roll.notes) {
-                <div class="roll-card__notes">
-                  <ng-icon name="lucideInfo" class="notes-icon"></ng-icon>
-                  <p class="notes-text">{{ roll.notes }}</p>
-                </div>
-              }
-            </div>
-
-            <div class="roll-card__actions">
-              <button class="action-btn action-btn--edit" (click)="onEdit(roll.id, $event)" aria-label="Edit roll">
-                <ng-icon name="lucideEdit3"></ng-icon>
-              </button>
-              <button class="action-btn action-btn--delete" (click)="onDelete(roll.id, $event)" aria-label="Delete roll">
-                <ng-icon name="lucideTrash2"></ng-icon>
-              </button>
-            </div>
-          </div>
+      <div class="roll-card__details">
+        <div class="detail-item">
+          <span class="detail-label">Frames:</span>
+          <span class="detail-value">{{ roll.frameCount }} exposure{{ roll.frameCount > 1 ? 's' : '' }}</span>
+        </div>
+        @if (roll.notes) {
+        <div class="roll-card__notes">
+          <ng-icon name="lucideInfo" class="notes-icon"></ng-icon>
+          <p class="notes-text">{{ roll.notes }}</p>
+        </div>
         }
       </div>
+
+      <div class="roll-card__actions">
+        <button class="action-btn action-btn--edit" (click)="onEdit(roll.id, $event)" aria-label="Edit roll">
+          <ng-icon name="lucideEdit3"></ng-icon>
+        </button>
+        <button class="action-btn action-btn--delete" (click)="onDelete(roll.id, $event)" aria-label="Delete roll">
+          <ng-icon name="lucideTrash2"></ng-icon>
+        </button>
+      </div>
+    </div>
     }
+    @empty {
+    <lib-empty-state icon="lucideFilm" title="No film rolls logged yet"
+      message="Keep track of your active and completed film rollsss, their format, box speed, and notes."
+      [button]="{icon: 'lucidePlus', label: 'Add Film Roll', path: 'new'}" />
+    }
+  </div>
   }
 </div>

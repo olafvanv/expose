@@ -24,7 +24,12 @@
       ],
       "@expose/feature-photos": ["./libs/features/photos/src/index.ts"],
       "@expose/shell-data-access": ["./libs/shell/data-access/src/index.ts"],
-      "@expose/ui-components": ["./libs/ui/components/src/index.ts"]
+      "@expose/ui/form-controls": [
+        "./libs/ui/components/form-controls/src/index.ts"
+      ],
+      "@expose/ui/empty-state": [
+        "./libs/ui/components/empty-state/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
