@@ -44,3 +44,4 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - All private variables should start with an underscore, except for the injects.
 - Always nest SCSS selectors.
 - Always place private injects at the top of the class.
+- Never import the CommonModule

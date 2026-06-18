@@ -6,24 +6,7 @@
     <p>Loading sessions...</p>
   </div>
   } @else {
-  <!-- Empty state -->
-  @if (sortedSessions().length === 0) {
-  <div class="empty-state">
-    <div class="empty-icon-wrapper">
-      <ng-icon name="lucideCamera" class="empty-icon"></ng-icon>
-    </div>
-    <h2 class="empty-title">No sessions yet</h2>
-    <p class="empty-description">
-      Start logging your shooting sessions. Track where you shot, which film roll you used, and how many frames you
-      captured.
-    </p>
-    <a routerLink="/sessions/new" class="expose-btn expose-btn--accent">
-      <ng-icon name="lucideCamera"></ng-icon>
-      New Session
-    </a>
-  </div>
-  } @else {
-  <!-- Session list -->
+
   <div class="sessions-list">
     @for (session of sortedSessions(); track session.id) {
     <div class="session-card" (click)="onNavigate(session.id)" role="button" tabindex="0"
@@ -63,8 +46,10 @@
       </div>
 
     </div>
+    } @empty {
+    <lib-empty-state icon="lucideCamera" title="No film sessions yet" message="Start logging your shooting sessions. Track where you shot, which film roll you used, and how many frames you
+          captured." [button]="{icon: 'lucideCamera', label: 'New session', path: '/sessions/new'}" />
     }
   </div>
-  }
   }
 </div>

@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { PhotoStateService, SessionStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
+import { EmptyState } from '@expose/ui/empty-state';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCamera,
@@ -21,7 +22,7 @@ import {
   selector: 'lib-sessions',
   templateUrl: './sessions.component.html',
   styleUrl: './sessions.component.scss',
-  imports: [CommonModule, RouterLink, NgIconComponent],
+  imports: [DatePipe, NgIconComponent, EmptyState],
   providers: [
     provideIcons({
       lucideCamera,

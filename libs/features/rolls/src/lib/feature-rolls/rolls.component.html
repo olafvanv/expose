@@ -6,7 +6,6 @@
     <p>Loading film rolls...</p>
   </div>
   } @else {
-  <!-- Empty state -->
   <div class="rolls-grid">
     @for (roll of rollStateService.rolls(); track roll.id) {
     <div class="roll-card">
