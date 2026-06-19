@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RollStateService } from '@expose/rolls/data-access';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
+import { format } from 'date-fns';
 
 // =============================================================================
 // SessionEditComponent
@@ -24,11 +25,13 @@ export class SessionEditComponent implements OnInit {
   private readonly sessionStateService = inject(SessionStateService);
   private readonly rollStateService = inject(RollStateService);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
 
+  // Route param :id
+  public id = input<string>();
+  public isEditMode = computed<boolean>(() => !!this.id());
+
   public sessionForm!: FormGroup;
-  public isEditMode = false;
   public sessionId: string | null = null;
 
   /** Dropdown options for roll selection, built from loaded rolls. */
@@ -54,10 +57,11 @@ export class SessionEditComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log(this.id(), this.isEditMode());
     this.rollStateService.loadAll();
-    this._initForm();
-    this._checkEditMode();
-    this._setupHeader();
+    this.initForm();
+    this.checkEditMode();
+    this.setupHeader();
   }
 
   /**
@@ -79,8 +83,8 @@ export class SessionEditComponent implements OnInit {
       notes: formValue.notes || undefined,
     };
 
-    if (this.isEditMode && this.sessionId) {
-      await this.sessionStateService.updateSession(this.sessionId, sessionData);
+    if (this.isEditMode()) {
+      await this.sessionStateService.updateSession(this.id() as string, sessionData);
     } else {
       await this.sessionStateService.addSession(sessionData);
     }
@@ -88,8 +92,8 @@ export class SessionEditComponent implements OnInit {
     this.router.navigate(['/sessions']);
   }
 
-  private _initForm(): void {
-    const today = new Date().toISOString().split('T')[0];
+  private initForm(): void {
+    const today = format(new Date(), 'yyyy-MM-dd');
     this.sessionForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
       date: [today, [Validators.required]],
@@ -99,12 +103,9 @@ export class SessionEditComponent implements OnInit {
     });
   }
 
-  private _checkEditMode(): void {
-    this.sessionId = this.route.snapshot.paramMap.get('id');
-    this.isEditMode = !!this.sessionId;
-
-    if (this.isEditMode && this.sessionId) {
-      const existing = this.sessionStateService.getById(this.sessionId);
+  private checkEditMode(): void {
+    if (this.isEditMode()) {
+      const existing = this.sessionStateService.getById(this.id() as string);
       if (existing) {
         this.sessionForm.patchValue({
           title: existing.title,
@@ -120,9 +121,9 @@ export class SessionEditComponent implements OnInit {
     }
   }
 
-  private _setupHeader(): void {
+  private setupHeader(): void {
     this.headerService.setConfig({
-      title: this.isEditMode ? 'Edit Session' : 'New Session',
+      title: this.isEditMode() ? 'Edit Session' : 'New Session',
       showBackButton: true,
       backAction: () => this.router.navigate(['/sessions']),
       actionButtons: [

@@ -14,6 +14,7 @@
     "@angular/service-worker": "~21.2.0",
     "@ng-icons/core": "^33.2.3",
     "@ng-icons/lucide": "^33.2.3",
+    "date-fns": "^4.4.0",
     "rxjs": "~7.8.0"
   },
   "devDependencies": {
