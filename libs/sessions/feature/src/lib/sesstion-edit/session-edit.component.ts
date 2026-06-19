@@ -20,19 +20,19 @@ import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields
   imports: [CommonModule, ReactiveFormsModule, TextInputComponent, SelectInputComponent],
 })
 export class SessionEditComponent implements OnInit {
-  private readonly _headerService = inject(HeaderService);
-  private readonly _sessionStateService = inject(SessionStateService);
-  private readonly _rollStateService = inject(RollStateService);
-  private readonly _router = inject(Router);
-  private readonly _route = inject(ActivatedRoute);
-  private readonly _fb = inject(FormBuilder);
+  private readonly headerService = inject(HeaderService);
+  private readonly sessionStateService = inject(SessionStateService);
+  private readonly rollStateService = inject(RollStateService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly fb = inject(FormBuilder);
 
   public sessionForm!: FormGroup;
   public isEditMode = false;
   public sessionId: string | null = null;
 
   /** Dropdown options for roll selection, built from loaded rolls. */
-  public readonly rollOptions = this._rollStateService.rolls().map((roll) => ({
+  public readonly rollOptions = this.rollStateService.rolls().map((roll) => ({
     label: `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
     value: roll.id,
   }));
@@ -53,20 +53,12 @@ export class SessionEditComponent implements OnInit {
     return this.sessionForm.get('rollId') as FormControl;
   }
 
-  // ---------------------------------------------------------------------------
-  // Lifecycle Hooks
-  // ---------------------------------------------------------------------------
-
   public ngOnInit(): void {
-    this._rollStateService.loadAll();
+    this.rollStateService.loadAll();
     this._initForm();
     this._checkEditMode();
     this._setupHeader();
   }
-
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
 
   /**
    * Submits the form to save the session (creates new or updates existing).
@@ -88,21 +80,17 @@ export class SessionEditComponent implements OnInit {
     };
 
     if (this.isEditMode && this.sessionId) {
-      await this._sessionStateService.updateSession(this.sessionId, sessionData);
+      await this.sessionStateService.updateSession(this.sessionId, sessionData);
     } else {
-      await this._sessionStateService.addSession(sessionData);
+      await this.sessionStateService.addSession(sessionData);
     }
 
-    this._router.navigate(['/sessions']);
+    this.router.navigate(['/sessions']);
   }
-
-  // ---------------------------------------------------------------------------
-  // Private Methods
-  // ---------------------------------------------------------------------------
 
   private _initForm(): void {
     const today = new Date().toISOString().split('T')[0];
-    this.sessionForm = this._fb.group({
+    this.sessionForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
       date: [today, [Validators.required]],
       location: [''],
@@ -112,11 +100,11 @@ export class SessionEditComponent implements OnInit {
   }
 
   private _checkEditMode(): void {
-    this.sessionId = this._route.snapshot.paramMap.get('id');
+    this.sessionId = this.route.snapshot.paramMap.get('id');
     this.isEditMode = !!this.sessionId;
 
     if (this.isEditMode && this.sessionId) {
-      const existing = this._sessionStateService.getById(this.sessionId);
+      const existing = this.sessionStateService.getById(this.sessionId);
       if (existing) {
         this.sessionForm.patchValue({
           title: existing.title,
@@ -127,16 +115,16 @@ export class SessionEditComponent implements OnInit {
         });
       } else {
         // Session not found in state — navigate back to list.
-        this._router.navigate(['/sessions']);
+        this.router.navigate(['/sessions']);
       }
     }
   }
 
   private _setupHeader(): void {
-    this._headerService.setConfig({
+    this.headerService.setConfig({
       title: this.isEditMode ? 'Edit Session' : 'New Session',
       showBackButton: true,
-      backAction: () => this._router.navigate(['/sessions']),
+      backAction: () => this.router.navigate(['/sessions']),
       actionButtons: [
         {
           id: 'save-session',
