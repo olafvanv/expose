@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { CreateRollInput, Roll, UpdateRollInput } from '@expose/data-access';
+import { CreateRollInput, Roll, UpdateRollInput } from '../models/roll.model';
 import { RollDataService } from './roll-data.service';
 
 // =============================================================================

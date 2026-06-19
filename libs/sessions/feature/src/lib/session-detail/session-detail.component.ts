@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RollStateService } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
-import { RollStateService } from '@expose/rolls/data-access';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';

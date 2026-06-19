@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BaseDataService, CreateRollInput, Roll, STORE, UpdateRollInput } from '@expose/data-access';
+import { CreateRollInput, Roll, UpdateRollInput } from '../models/roll.model';
+import { BaseDataService } from './base-data.service';
+import { STORE } from './expose-database.service';
 
 // =============================================================================
 // RollDataService

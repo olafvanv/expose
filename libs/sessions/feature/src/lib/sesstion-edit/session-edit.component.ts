@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RollStateService } from '@expose/rolls/data-access';
+import { RollStateService } from '@expose/data-access';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';

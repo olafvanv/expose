@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilmFormat } from '@expose/data-access';
-import { RollStateService } from '@expose/rolls/data-access';
+import { FilmFormat, RollStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
 

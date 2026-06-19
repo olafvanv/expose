@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RollStateService } from '@expose/rolls/data-access';
+import { RollStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { EmptyState } from '@expose/ui/empty-state';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
