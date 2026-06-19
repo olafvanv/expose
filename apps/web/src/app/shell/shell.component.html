@@ -17,21 +17,21 @@
   <h1 class="shell__header-title">{{ headerService.title() }}</h1>
 
   <div class="shell__header-right">
-    @for (btn of headerService.actionButtons(); track btn.id) {
+    @for (button of headerService.actionButtons(); track button.id) {
       <button
         class="shell__header-btn"
-        [class.shell__header-btn--text]="btn.type === 'text'"
-        (click)="btn.action()"
-        [disabled]="btn.disabled"
-        [attr.aria-label]="btn.ariaLabel || btn.label">
-        @if (btn.type === 'icon' && btn.icon) {
+        [class.shell__header-btn--text]="button.type === 'text'"
+        (click)="button.action()"
+        [disabled]="button.disabled"
+        [attr.aria-label]="button.ariaLabel || button.label">
+        @if (button.type === 'icon' && button.icon) {
           <span
             class="shell__header-icon"
             aria-hidden="true">
-            <ng-icon [name]="btn.icon"></ng-icon>
+            <ng-icon [name]="button.icon"></ng-icon>
           </span>
         } @else {
-          {{ btn.label }}
+          {{ button.label }}
         }
       </button>
     }

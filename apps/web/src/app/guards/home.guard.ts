@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { SettingsStateService } from '@expose/data-access';
+import { SettingsStateService } from '@expose/settings/data-access';
 
 /**
  * Guard that redirects the user from the root path to their preferred home page.

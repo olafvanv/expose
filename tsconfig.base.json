@@ -14,22 +14,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@expose/ui-styles": ["./libs/ui/styles/src/index.ts"],
-      "@expose/feature-sessions": ["./libs/features/sessions/src/index.ts"],
-      "@expose/feature-rolls": ["./libs/features/rolls/src/index.ts"],
-      "@expose/feature-settings": ["./libs/features/settings/src/index.ts"],
-      "@expose/data-access": ["./libs/data-access/src/index.ts"],
-      "@expose/feature-photo-detail": [
-        "./libs/features/photo-detail/src/index.ts"
-      ],
-      "@expose/feature-photos": ["./libs/features/photos/src/index.ts"],
-      "@expose/shell-data-access": ["./libs/shell/data-access/src/index.ts"],
-      "@expose/ui/form-controls": [
-        "./libs/ui/components/form-controls/src/index.ts"
-      ],
-      "@expose/ui/empty-state": [
-        "./libs/ui/components/empty-state/src/index.ts"
-      ]
+      "@expose/ui-styles": ["./libs/shared/ui/styles/src/index.ts"],
+      "@expose/data-access": ["./libs/shared/data-access/src/index.ts"],
+      "@expose/photos/data-access": ["./libs/photos/data-access/src/index.ts"],
+      "@expose/photos/feature": ["./libs/photos/feature/src/index.ts"],
+      "@expose/shell-data-access": ["./libs/shared/shell/data-access/src/index.ts"],
+      "@expose/ui/empty-state": ["./libs/shared/ui/components/empty-state/src/index.ts"],
+      "@expose/ui/form-fields": ["./libs/shared/ui/components/form-fields/src/index.ts"],
+      "@expose/rolls/feature": ["./libs/rolls/feature/src/index.ts"],
+      "@expose/sessions/feature": ["./libs/sessions/feature/src/index.ts"],
+      "@expose/settings/feature": ["./libs/settings/feature/src/index.ts"],
+      "@expose/rolls/data-access": ["./libs/rolls/data-access/src/index.ts"],
+      "@expose/sessions/data-access": ["./libs/sessions/data-access/src/index.ts"],
+      "@expose/settings/data-access": ["./libs/settings/data-access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

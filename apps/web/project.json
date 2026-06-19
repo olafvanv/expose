@@ -20,9 +20,9 @@
             "input": "apps/web/public"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
+        "styles": ["apps/web/src/styles.scss", "libs/shared/ui/styles/src/index.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/ui/styles/src"]
+          "includePaths": ["libs/shared/ui/styles/src"]
         }
       },
       "configurations": {

@@ -1,0 +1,67 @@
+<div class="roll-form-container">
+  <form
+    [formGroup]="rollForm"
+    (ngSubmit)="onSave()"
+    class="roll-form">
+    <!-- Brand Input -->
+    <lib-text-input
+      label="Brand"
+      [control]="brandControl"
+      placeholder="e.g. Kodak, Fujifilm, Ilford"></lib-text-input>
+
+    <!-- Name/Type Input -->
+    <lib-text-input
+      label="Film Name"
+      [control]="nameControl"
+      placeholder="e.g. Portra 400, HP5 Plus, Gold 200"></lib-text-input>
+
+    <!-- Format Segmented/Radio Selection -->
+    <div class="form-field">
+      <span class="form-label">Film Format</span>
+      <div class="format-selector">
+        @for (opt of formatOptions; track opt) {
+          <label
+            class="format-option"
+            [class.format-option--selected]="rollForm.get('format')?.value === opt">
+            <input
+              type="radio"
+              formControlName="format"
+              [value]="opt"
+              class="sr-only" />
+            {{ opt }}
+          </label>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- ISO Selector -->
+      <lib-select-input
+        label="ISO / Speed"
+        [control]="isoControl"
+        [options]="isoSelectOptions"></lib-select-input>
+
+      <!-- Frame Count -->
+      <lib-text-input
+        label="Frames"
+        [control]="frameCountControl"
+        type="number"
+        placeholder="e.g. 36"></lib-text-input>
+    </div>
+
+    <!-- Notes Textarea -->
+    <div class="form-field">
+      <label
+        for="notes"
+        class="form-label">
+        Notes (Optional)
+      </label>
+      <textarea
+        id="notes"
+        formControlName="notes"
+        placeholder="e.g. Pushed +1 stop, expired in 2012"
+        rows="3"
+        class="form-textarea"></textarea>
+    </div>
+  </form>
+</div>

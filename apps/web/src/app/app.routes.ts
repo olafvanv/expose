@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { ShellComponent } from './shell/shell.component';
 import { homeGuard } from './guards/home.guard';
+import { ShellComponent } from './shell/shell.component';
 
 export const appRoutes: Route[] = [
   {
@@ -15,37 +15,19 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'sessions',
-        loadChildren: () =>
-          import('@expose/feature-sessions').then((m) => m.sessionsRoutes),
+        loadChildren: () => import('@expose/sessions/feature').then((m) => m.sessionsRoutes),
       },
       {
         path: 'rolls',
-        loadChildren: () =>
-          import('@expose/feature-rolls').then((m) => m.rollsRoutes),
+        loadChildren: () => import('@expose/rolls/feature').then((m) => m.rollsRoutes),
       },
       {
         path: 'settings',
-        loadChildren: () =>
-          import('@expose/feature-settings').then((m) => m.settingsRoutes),
+        loadChildren: () => import('@expose/settings/feature').then((m) => m.settingsRoutes),
       },
       {
         path: 'photos',
-        loadChildren: () =>
-          import('@expose/feature-photos').then((m) => m.photosRoutes),
-      },
-      {
-        path: 'photos/new',
-        loadChildren: () =>
-          import('@expose/feature-photo-detail').then(
-            (m) => m.photoDetailRoutes,
-          ),
-      },
-      {
-        path: 'photos/:id',
-        loadChildren: () =>
-          import('@expose/feature-photo-detail').then(
-            (m) => m.photoDetailRoutes,
-          ),
+        loadChildren: () => import('@expose/photos/feature').then((m) => m.photosRoutes),
       },
       { path: '**', redirectTo: '' },
     ],

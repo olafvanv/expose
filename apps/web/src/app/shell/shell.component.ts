@@ -1,13 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import {
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterLinkActive,
-  RouterOutlet,
-} from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
@@ -69,6 +63,10 @@ type AddOptionType = 'session' | 'roll' | 'photo';
   ],
 })
 export class ShellComponent {
+  public readonly headerService: HeaderService = inject(HeaderService);
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
+
   public readonly navItemsLeft: NavItem[] = [
     { path: '/sessions', label: 'Sessions', icon: 'lucideCamera' },
     { path: '/rolls', label: 'Rolls', icon: 'lucideFilm' },
@@ -85,10 +83,7 @@ export class ShellComponent {
     { label: 'Add Photo', icon: 'lucideImage', type: 'photo' },
   ];
 
-  public readonly headerService: HeaderService = inject(HeaderService);
   public readonly isAddMenuOpen = signal<boolean>(false);
-  private readonly router = inject(Router);
-  private readonly location = inject(Location);
 
   constructor() {
     this.router.events
@@ -101,10 +96,6 @@ export class ShellComponent {
         this.isAddMenuOpen.set(false); // Close menu when navigating
       });
   }
-
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
 
   /**
    * Handles the header back button click.

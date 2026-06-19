@@ -1,0 +1,110 @@
+<div class="session-detail">
+  @if (session(); as s) {
+    <!-- Session metadata -->
+    <div class="session-meta">
+      <div class="meta-row">
+        <ng-icon
+          name="lucideCalendar"
+          class="meta-icon"></ng-icon>
+        <time
+          class="meta-value"
+          [dateTime]="s.date">
+          {{ s.date | date: 'EEEE, MMMM d, yyyy' }}
+        </time>
+      </div>
+
+      @if (s.location) {
+        <div class="meta-row">
+          <ng-icon
+            name="lucideMapPin"
+            class="meta-icon"></ng-icon>
+          <span class="meta-value">{{ s.location }}</span>
+        </div>
+      }
+
+      @if (roll(); as r) {
+        <div class="meta-row">
+          <ng-icon
+            name="lucideFilm"
+            class="meta-icon"></ng-icon>
+          <span class="meta-value">{{ r.brand }} {{ r.name }} — ISO {{ r.iso }}</span>
+        </div>
+      }
+
+      @if (s.notes) {
+        <p class="session-notes">{{ s.notes }}</p>
+      }
+    </div>
+
+    <!-- Photos section -->
+    <div class="photos-section">
+      <div class="photos-header">
+        <h2 class="photos-title">
+          Photos
+          <span class="photos-count">{{ photos().length }}</span>
+        </h2>
+        <button
+          class="add-photo-btn"
+          (click)="onAddPhoto()"
+          aria-label="Add photo to this session">
+          <ng-icon name="lucidePlus"></ng-icon>
+          Add Photo
+        </button>
+      </div>
+
+      @if (photos().length === 0) {
+        <div class="photos-empty">
+          <ng-icon
+            name="lucideCamera"
+            class="photos-empty-icon"></ng-icon>
+          <p class="photos-empty-text">No photos logged yet. Tap "Add Photo" to log your first frame.</p>
+        </div>
+      } @else {
+        <div class="photos-list">
+          @for (photo of photos(); track photo.id) {
+            <div class="photo-row">
+              @if (photo.frameNumber !== null) {
+                <span class="photo-frame">#{{ photo.frameNumber }}</span>
+              }
+
+              <div class="photo-settings">
+                <span class="setting">
+                  <span class="setting__label">f/</span>
+                  <span class="setting__value">{{ photo.aperture }}</span>
+                </span>
+                <span class="setting-divider">·</span>
+                <span class="setting">
+                  <span class="setting__value">{{ photo.shutterSpeed }}s</span>
+                </span>
+                <span class="setting-divider">·</span>
+                <span class="setting">
+                  <span class="setting__label">ISO</span>
+                  <span class="setting__value">{{ photo.iso }}</span>
+                </span>
+                @if (photo.focalLength) {
+                  <span class="setting-divider">·</span>
+                  <span class="setting">
+                    <span class="setting__value">{{ photo.focalLength }}mm</span>
+                  </span>
+                }
+              </div>
+
+              @if (photo.subject) {
+                <span class="photo-subject">{{ photo.subject }}</span>
+              }
+
+              @if (photo.lightCondition) {
+                <span class="photo-badge">{{ photo.lightCondition }}</span>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- Session not found / still loading -->
+    <div class="loading-state">
+      <div class="spinner"></div>
+    </div>
+  }
+</div>
