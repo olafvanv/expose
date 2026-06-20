@@ -22,11 +22,11 @@
       placeholder="e.g. Amsterdam, Jordaan"></lib-text-input>
 
     <!-- Film Roll (optional) -->
-    @if (rollOptions.length > 0) {
+    @if (rollOptions().length > 0) {
       <lib-select-input
         label="Film Roll (Optional)"
         [control]="rollIdControl"
-        [options]="rollOptions"></lib-select-input>
+        [options]="rollOptions()"></lib-select-input>
     } @else {
       <div class="form-field">
         <span class="form-label">Film Roll (Optional)</span>

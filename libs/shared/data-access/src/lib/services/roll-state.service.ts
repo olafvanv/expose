@@ -16,10 +16,6 @@ export class RollStateService {
   public readonly rolls = this._rolls.asReadonly();
   public readonly loading = this._loading.asReadonly();
 
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
-
   /**
    * Loads all rolls from the database into the state.
    */

@@ -34,11 +34,12 @@ export class SessionEditComponent implements OnInit {
   public sessionForm!: FormGroup;
   public sessionId: string | null = null;
 
-  /** Dropdown options for roll selection, built from loaded rolls. */
-  public readonly rollOptions = this.rollStateService.rolls().map((roll) => ({
-    label: `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
-    value: roll.id,
-  }));
+  public readonly rollOptions = computed(() =>
+    this.rollStateService.rolls().map((roll) => ({
+      label: `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
+      value: roll.id,
+    })),
+  );
 
   public get titleControl(): FormControl {
     return this.sessionForm.get('title') as FormControl;
@@ -57,7 +58,6 @@ export class SessionEditComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(this.id(), this.isEditMode());
     this.rollStateService.loadAll();
     this.initForm();
     this.checkEditMode();
