@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RollStateService } from '@expose/data-access';
+import { CreateSessionInput, RollStateService } from '@expose/data-access';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
 import { format } from 'date-fns';
 
-// =============================================================================
-// SessionEditComponent
-// Standalone form component for creating and editing shooting sessions.
-// Operates in 'create' mode for /sessions/new and 'edit' for /sessions/:id/edit.
-// =============================================================================
+type SessionForm = {
+  title: FormControl<string | null>;
+  date: FormControl<string | null>;
+  location: FormControl<string | null>;
+  rollId: FormControl<string | null>;
+  notes: FormControl<string | null>;
+};
 
 @Component({
   selector: 'lib-session-edit',
@@ -29,10 +31,15 @@ export class SessionEditComponent implements OnInit {
 
   // Route param :id
   public id = input<string>();
-  public isEditMode = computed<boolean>(() => !!this.id());
+  public isEditMode = computed(() => !!this.id());
 
-  public sessionForm!: FormGroup;
-  public sessionId: string | null = null;
+  public sessionForm: FormGroup<SessionForm> = this.fb.group({
+    title: ['', [Validators.required, Validators.minLength(2)]],
+    date: [format(new Date(), 'yyyy-MM-dd'), [Validators.required]],
+    location: [''],
+    rollId: [''],
+    notes: [''],
+  });
 
   public readonly rollOptions = computed(() =>
     this.rollStateService.rolls().map((roll) => ({
@@ -41,25 +48,8 @@ export class SessionEditComponent implements OnInit {
     })),
   );
 
-  public get titleControl(): FormControl {
-    return this.sessionForm.get('title') as FormControl;
-  }
-
-  public get dateControl(): FormControl {
-    return this.sessionForm.get('date') as FormControl;
-  }
-
-  public get locationControl(): FormControl {
-    return this.sessionForm.get('location') as FormControl;
-  }
-
-  public get rollIdControl(): FormControl {
-    return this.sessionForm.get('rollId') as FormControl;
-  }
-
   public ngOnInit(): void {
     this.rollStateService.loadAll();
-    this.initForm();
     this.checkEditMode();
     this.setupHeader();
   }
@@ -75,12 +65,12 @@ export class SessionEditComponent implements OnInit {
     }
 
     const formValue = this.sessionForm.value;
-    const sessionData = {
-      title: formValue.title,
-      date: formValue.date,
-      location: formValue.location || undefined,
-      rollId: formValue.rollId || undefined,
-      notes: formValue.notes || undefined,
+    const sessionData: CreateSessionInput = {
+      title: formValue.title as string,
+      date: formValue.date as string,
+      location: formValue.location as string,
+      rollId: formValue.rollId as string,
+      notes: formValue.notes as string,
     };
 
     if (this.isEditMode()) {
@@ -90,17 +80,6 @@ export class SessionEditComponent implements OnInit {
     }
 
     this.router.navigate(['/sessions']);
-  }
-
-  private initForm(): void {
-    const today = format(new Date(), 'yyyy-MM-dd');
-    this.sessionForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(2)]],
-      date: [today, [Validators.required]],
-      location: [''],
-      rollId: [''],
-      notes: [''],
-    });
   }
 
   private checkEditMode(): void {

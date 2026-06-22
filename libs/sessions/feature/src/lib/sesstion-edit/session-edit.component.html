@@ -6,26 +6,26 @@
     <!-- Title -->
     <lib-text-input
       label="Title"
-      [control]="titleControl"
+      [control]="sessionForm.controls.title"
       placeholder="e.g. Zeeland roadtrip, Portrait Maaike"></lib-text-input>
 
     <!-- Date -->
     <lib-text-input
       label="Date"
-      [control]="dateControl"
+      [control]="sessionForm.controls.date"
       type="date"></lib-text-input>
 
     <!-- Location (optional) -->
     <lib-text-input
       label="Location (Optional)"
-      [control]="locationControl"
+      [control]="sessionForm.controls.location"
       placeholder="e.g. Amsterdam, Jordaan"></lib-text-input>
 
     <!-- Film Roll (optional) -->
     @if (rollOptions().length > 0) {
       <lib-select-input
         label="Film Roll (Optional)"
-        [control]="rollIdControl"
+        [control]="sessionForm.controls.rollId"
         [options]="rollOptions()"></lib-select-input>
     } @else {
       <div class="form-field">
@@ -43,7 +43,7 @@
       </label>
       <textarea
         id="session-notes"
-        formControlName="notes"
+        [formControl]="sessionForm.controls.notes"
         placeholder="e.g. Overcast light all day, experimented with zone focusing"
         rows="3"
         class="form-textarea"></textarea>

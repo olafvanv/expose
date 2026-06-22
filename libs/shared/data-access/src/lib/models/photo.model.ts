@@ -27,7 +27,7 @@ export type Photo = {
    * Frame number on the film roll, e.g. 1–36.
    * Optional: not always tracked.
    */
-  frameNumber?: number;
+  frameNumber?: string;
 
   // -------------------------------------------------------------------------
   // Exposure settings

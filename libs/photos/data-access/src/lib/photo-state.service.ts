@@ -16,9 +16,9 @@ export class PhotoStateService {
   public readonly photos = this._photos.asReadonly();
   public readonly loading = this._loading.asReadonly();
 
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
+  public getById(id: string): Photo | undefined {
+    return this._photos().find((f) => f.id === id);
+  }
 
   /**
    * Loads all photos from the database into the state.

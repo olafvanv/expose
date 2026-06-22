@@ -1,1 +1,10 @@
-
+<div class="photos-form-container">
+  <form
+    [formGroup]="photoForm"
+    (ngSubmit)="onSave()"
+    class="photo-form">
+    <lib-text-input
+      label="Subject"
+      [control]="photoForm.controls.subject"></lib-text-input>
+  </form>
+</div>
