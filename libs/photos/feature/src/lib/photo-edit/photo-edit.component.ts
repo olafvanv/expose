@@ -1,10 +1,11 @@
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Aperture, IsoValue, LightCondition, Photo, RollStateService, ShutterSpeed } from '@expose/data-access';
+import { Aperture, apertureOptions, IsoValue, LightCondition, Photo, RollStateService, ShutterSpeed } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { TextInputComponent } from '@expose/ui/form-fields';
+import { ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
+import { toFormOptions } from '@expose/util';
 
 type PhotoForm = {
   subject: FormControl<string | null>;
@@ -18,7 +19,7 @@ type PhotoForm = {
 };
 
 @Component({
-  imports: [ReactiveFormsModule, TextInputComponent],
+  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker],
   selector: 'lib-photo-edit',
   templateUrl: './photo-edit.component.html',
   styleUrl: './photo-edit.component.scss',
@@ -45,6 +46,12 @@ export class PhotoEditComponent implements OnInit {
     notes: [''],
     rollId: [''],
   });
+
+  public apertureFormOptions = toFormOptions(
+    apertureOptions,
+    (v) => v,
+    (v) => `f/${v}`,
+  );
 
   public ngOnInit(): void {
     this.photoStateService.loadAll();

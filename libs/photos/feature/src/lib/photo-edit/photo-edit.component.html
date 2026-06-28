@@ -1,10 +1,13 @@
-<div class="photos-form-container">
+<div class="photo-form-container">
   <form
+    class="photo-form"
     [formGroup]="photoForm"
     (ngSubmit)="onSave()"
     class="photo-form">
     <lib-text-input
       label="Subject"
       [control]="photoForm.controls.subject"></lib-text-input>
+
+    <lib-scroll-picker [options]="apertureFormOptions"></lib-scroll-picker>
   </form>
 </div>

@@ -5,7 +5,7 @@ import { PhotosComponent } from './photos/photos.component';
 
 export const photosRoutes: Routes = [
   { path: '', component: PhotosComponent },
-  { path: ':id', component: PhotoDetailComponent },
   { path: 'new', component: PhotoEditComponent },
+  { path: ':id', component: PhotoDetailComponent },
   { path: ':id/edit', component: PhotoEditComponent },
 ];

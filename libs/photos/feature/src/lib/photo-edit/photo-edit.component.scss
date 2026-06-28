@@ -1,1 +1,11 @@
+.photo-form-container {
+  max-width: var(--content-width-md, 600px);
+  margin: 0 auto;
+  // padding: var(--space-sm) 0;
 
+  .photo-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}

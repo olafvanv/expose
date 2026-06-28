@@ -52,7 +52,7 @@ export class SessionDetailComponent implements OnInit {
   public readonly photos = computed(() =>
     [...this._photoStateService.photos()].sort((a, b) => {
       if (a.frameNumber != null && b.frameNumber != null) {
-        return a.frameNumber - b.frameNumber;
+        return Number(a.frameNumber) - Number(b.frameNumber);
       }
       return a.takenAt.localeCompare(b.takenAt);
     }),
