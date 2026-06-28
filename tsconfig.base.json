@@ -26,7 +26,8 @@
       "@expose/settings/feature": ["./libs/settings/feature/src/index.ts"],
       "@expose/rolls/data-access": ["./libs/rolls/data-access/src/index.ts"],
       "@expose/sessions/data-access": ["./libs/sessions/data-access/src/index.ts"],
-      "@expose/settings/data-access": ["./libs/settings/data-access/src/index.ts"]
+      "@expose/settings/data-access": ["./libs/settings/data-access/src/index.ts"],
+      "@expose/util": ["./libs/shared/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
