@@ -30,7 +30,7 @@ export class ScrollPicker implements OnInit, AfterViewInit {
   private readonly cdRef = inject(ChangeDetectorRef);
 
   public readonly control = input.required<FormControl<unknown>>();
-  public readonly options = input.required<FormOption[]>();
+  public readonly options = input.required<FormOption<string | number>[]>();
   public readonly label = input<string>('');
 
   public readonly scrollRef = viewChild<ElementRef>('scrollRef');

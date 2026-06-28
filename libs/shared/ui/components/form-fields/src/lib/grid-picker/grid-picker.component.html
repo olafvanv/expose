@@ -1,0 +1,20 @@
+<div class="grid-picker-container">
+  <div class="grid-picker">
+    @for (option of options(); track option.value) {
+      <button
+        class="grid-picker__item"
+        [class.active]="value() === option.value"
+        [class.error]="isTouched() && control().invalid"
+        (click)="select(option.value)"
+        type="button">
+        @if (option.icon) {
+          <ng-icon
+            [name]="option.icon"
+            class="option-icon"
+            aria-hidden="true" />
+        }
+        <span class="label">{{ option.label }}</span>
+      </button>
+    }
+  </div>
+</div>

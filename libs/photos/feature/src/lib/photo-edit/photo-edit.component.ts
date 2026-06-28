@@ -14,8 +14,20 @@ import {
 } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
+import { GridPicker, ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
 import { toFormOptions } from '@expose/util';
+import { provideIcons } from '@ng-icons/core';
+import {
+  lucideCloud,
+  lucideCloudSun,
+  lucideHouse,
+  lucideLamp,
+  lucideMoon,
+  lucideStars,
+  lucideSun,
+  lucideSunset,
+  lucideTrees,
+} from '@ng-icons/lucide';
 
 type PhotoForm = {
   subject: FormControl<string | null>;
@@ -28,11 +40,36 @@ type PhotoForm = {
   rollId: FormControl<string | null>;
 };
 
+const lightConditionOptions = [
+  { value: 'sunny', label: 'Zonnig', icon: 'lucideSun' },
+  { value: 'partly-cloudy', label: 'Half bew.', icon: 'lucideCloudSun' },
+  { value: 'overcast', label: 'Bewolkt', icon: 'lucideCloud' },
+  { value: 'shade', label: 'Schaduw', icon: 'lucideTrees' },
+  { value: 'golden-hour', label: 'Gouden uur', icon: 'lucideSunset' },
+  { value: 'blue-hour', label: 'Blauwe uur', icon: 'lucideMoon' },
+  { value: 'indoor-natural', label: 'Binnen/dag', icon: 'lucideHouse' },
+  { value: 'indoor-artificial', label: 'Binnen/kunst', icon: 'lucideLamp' },
+  { value: 'night', label: 'Nacht', icon: 'lucideStars' },
+];
+
 @Component({
-  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker],
+  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker, GridPicker],
   selector: 'lib-photo-edit',
   templateUrl: './photo-edit.component.html',
   styleUrl: './photo-edit.component.scss',
+  providers: [
+    provideIcons({
+      lucideSun,
+      lucideCloudSun,
+      lucideCloud,
+      lucideTrees,
+      lucideSunset,
+      lucideMoon,
+      lucideHouse,
+      lucideLamp,
+      lucideStars,
+    }),
+  ],
 })
 export class PhotoEditComponent implements OnInit {
   private readonly headerService = inject(HeaderService);
@@ -69,6 +106,12 @@ export class PhotoEditComponent implements OnInit {
     valueFn: (v) => v,
 
     labelFn: (v) => v.toString(),
+  });
+
+  public lightConditionOptions = toFormOptions([...lightConditionOptions], {
+    valueFn: (v) => v.value,
+    labelFn: (v) => v.label,
+    iconFn: (v) => v.icon,
   });
 
   public ngOnInit(): void {

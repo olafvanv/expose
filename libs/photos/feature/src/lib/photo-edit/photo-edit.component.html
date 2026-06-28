@@ -2,8 +2,7 @@
   <form
     class="photo-form"
     [formGroup]="photoForm"
-    (ngSubmit)="onSave()"
-    class="photo-form">
+    (ngSubmit)="onSave()">
     <lib-text-input
       label="Subject"
       [control]="photoForm.controls.subject" />
@@ -26,5 +25,9 @@
       [options]="isoOptions" />
 
     <div class="form-subheader">Light conditions</div>
+
+    <lib-grid-picker
+      [control]="photoForm.controls.lightCondition"
+      [options]="lightConditionOptions" />
   </form>
 </div>

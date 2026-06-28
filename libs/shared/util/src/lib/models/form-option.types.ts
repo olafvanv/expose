@@ -1,6 +1,6 @@
 import { computed, Signal } from '@angular/core';
 
-export type FormOption<T = string> = {
+export type FormOption<T extends string | number = string> = {
   value: T;
   label: string;
   icon?: string;
