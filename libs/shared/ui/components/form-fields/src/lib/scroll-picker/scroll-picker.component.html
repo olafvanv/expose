@@ -1,21 +1,35 @@
-<label>Picker</label>
-<div class="picker-container">
+<div
+  class="scroll-picker-container"
+  [class.has-error]="control().touched && control().invalid">
+  @if (label()) {
+    <label class="picker-label">{{ label() }}</label>
+  }
   <div
-    class="fade"
-    [class.fade-left]="showLeftFade()"></div>
-  <div
-    class="scroll-container"
-    #scrollRef>
-    @for (option of options(); track option.value) {
-      <div
-        class="picker-item"
-        [class.picker-item--active]="value() === option.value"
-        (click)="select(option.value)">
-        {{ option.label }}
-      </div>
-    }
+    class="picker-container"
+    [class.picker-container--disabled]="isDisabled()">
+    <div
+      class="fade"
+      [class.fade-left]="showLeftFade()"></div>
+    <div
+      class="scroll-container"
+      #scrollRef>
+      @for (option of options(); track option.value) {
+        <div
+          class="picker-item"
+          [class.picker-item--active]="value() === option.value"
+          (click)="select(option.value)">
+          {{ option.label }}
+        </div>
+      }
+    </div>
+    <div
+      class="fade"
+      [class.fade-right]="showRightFade()"></div>
   </div>
-  <div
-    class="fade"
-    [class.fade-right]="showRightFade()"></div>
+
+  @if (control().touched && control().invalid) {
+    @if (control().hasError('required')) {
+      <span class="form-error">{{ label() }} is required.</span>
+    }
+  }
 </div>

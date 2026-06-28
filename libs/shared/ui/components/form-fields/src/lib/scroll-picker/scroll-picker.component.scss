@@ -1,13 +1,28 @@
-label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
+.scroll-picker-container {
+  .picker-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xs);
+  }
+
+  &.has-error {
+    .picker-label {
+      color: var(--color-error, #ef4444);
+    }
+  }
 }
 
 .picker-container {
   display: block;
   box-sizing: border-box;
   position: relative;
+
+  &--disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 
   .scroll-container {
     display: flex;
@@ -62,4 +77,10 @@ label {
       background: linear-gradient((to right, transparent, var(--color-bg-base)));
     }
   }
+}
+
+.form-error {
+  font-size: var(--font-size-xs, 12px);
+  color: var(--color-error, #ef4444);
+  font-weight: var(--font-weight-medium);
 }

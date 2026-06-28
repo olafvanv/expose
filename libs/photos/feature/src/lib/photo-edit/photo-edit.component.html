@@ -6,8 +6,11 @@
     class="photo-form">
     <lib-text-input
       label="Subject"
-      [control]="photoForm.controls.subject"></lib-text-input>
+      [control]="photoForm.controls.subject" />
 
-    <lib-scroll-picker [options]="apertureFormOptions"></lib-scroll-picker>
+    <lib-scroll-picker
+      label="Aperture"
+      [control]="photoForm.controls.aperture"
+      [options]="apertureFormOptions" />
   </form>
 </div>

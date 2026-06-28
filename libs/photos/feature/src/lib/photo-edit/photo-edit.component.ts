@@ -38,7 +38,7 @@ export class PhotoEditComponent implements OnInit {
 
   public photoForm: FormGroup<PhotoForm> = this.fb.group({
     subject: ['', [Validators.required]],
-    aperture: [5.6, [Validators.required]],
+    aperture: [null as Aperture | null, [Validators.required]],
     shutterSpeed: ['auto'],
     iso: [200 as IsoValue],
     lightCondition: ['' as LightCondition],
@@ -62,6 +62,8 @@ export class PhotoEditComponent implements OnInit {
   public async onSave() {
     if (this.photoForm.invalid) {
       this.photoForm.markAllAsTouched();
+
+      console.log(this.photoForm);
       return;
     }
 

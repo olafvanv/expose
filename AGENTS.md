@@ -57,10 +57,11 @@ Libraries are organized by domain. Each domain can contain the following library
 - Every method in a service must have a short description (JSDoc)
 - All comments, descriptions, code, and UI text must be in English.
 - You don't have to verify your changes by running the app and by opening a browser. You can see what's going on from the terminal output.
-- All private variables should start with an underscore, except for the injects.
+- All private fields/properties should start with an underscore, except for the injects and methods.
 - Always nest SCSS selectors.
 - Always place private injects at the top of the class.
 - Never import the `CommonModule`
 - Use typed `FormGroup<T>` instead of the untyped `FormGroup` where possible
 - Use `toFormOptions()` or `toFormOptionsComputed()` from `@expose/util` to map arrays to `FormOption[]` for use in form controls
 - Route parameters passed as Angular inputs use `input<string | null>(null)` — do not use `ActivatedRoute.snapshot` when an input signal is available
+- Do not use section divider comments (e.g. `// --------------- Public Methods ---------------`)
