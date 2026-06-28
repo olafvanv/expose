@@ -1,0 +1,65 @@
+label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.picker-container {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+
+  .scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 4px 0;
+    box-sizing: border-box;
+    gap: 0.5rem;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari
+    }
+
+    .picker-item {
+      flex-shrink: 0;
+      min-width: 56px;
+      height: 48px;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+      background-color: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      &--active {
+        background-color: var(--color-accent);
+        color: var(--color-text-inverse);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+
+    &.fade-left {
+      left: 0;
+      background: linear-gradient(to left, transparent, var(--color-bg-base));
+    }
+
+    &.fade-right {
+      right: 0;
+      background: linear-gradient((to right, transparent, var(--color-bg-base)));
+    }
+  }
+}

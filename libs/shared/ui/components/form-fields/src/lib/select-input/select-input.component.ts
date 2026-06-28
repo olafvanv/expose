@@ -1,11 +1,6 @@
-import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-
-// =============================================================================
-// SelectInputComponent
-// Standalone reusable form control for select dropdown fields using Signals.
-// =============================================================================
 
 @Component({
   selector: 'lib-select-input',
@@ -23,10 +18,6 @@ export class SelectInputComponent {
   public readonly computedId = computed(() => {
     return this.id() || this.label().toLowerCase().replace(/\s+/g, '-');
   });
-
-  // ---------------------------------------------------------------------------
-  // Public Methods
-  // ---------------------------------------------------------------------------
 
   /**
    * Helper method to determine if an option is an object with a label and value.

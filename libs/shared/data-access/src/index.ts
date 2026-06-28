@@ -1,5 +1,5 @@
 // Shared primitives
-export type { Aperture, FilmFormat, IsoValue, LightCondition, ShutterSpeed } from './lib/models/shared.model';
+export * from './lib/models/shared.model';
 
 // Models
 export type { CreatePhotoInput, Photo, UpdatePhotoInput } from './lib/models/photo.model';

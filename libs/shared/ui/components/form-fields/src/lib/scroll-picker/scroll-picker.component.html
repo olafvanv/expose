@@ -1,0 +1,21 @@
+<label>Picker</label>
+<div class="picker-container">
+  <div
+    class="fade"
+    [class.fade-left]="showLeftFade()"></div>
+  <div
+    class="scroll-container"
+    #scrollRef>
+    @for (option of options(); track option.value) {
+      <div
+        class="picker-item"
+        [class.picker-item--active]="value() === option.value"
+        (click)="select(option.value)">
+        {{ option.label }}
+      </div>
+    }
+  </div>
+  <div
+    class="fade"
+    [class.fade-right]="showRightFade()"></div>
+</div>

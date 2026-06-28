@@ -17,6 +17,8 @@ export type ShutterSpeed = string;
  */
 export type Aperture = number;
 
+export const apertureOptions = [1.0, 1.4, 1.8, 2, 2.8, 3.5, 4, 5.6, 8, 11, 16, 22];
+
 /** Light conditions at the time of shooting. */
 export type LightCondition =
   | 'sunny' // sunny, hard shadows
