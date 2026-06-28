@@ -14,5 +14,17 @@
       label="Aperture"
       [control]="photoForm.controls.aperture"
       [options]="apertureFormOptions" />
+
+    <lib-scroll-picker
+      label="Shutter speed"
+      [control]="photoForm.controls.shutterSpeed"
+      [options]="shutterSpeedOptions" />
+
+    <lib-scroll-picker
+      label="ISO"
+      [control]="photoForm.controls.iso"
+      [options]="isoOptions" />
+
+    <div class="form-subheader">Light conditions</div>
   </form>
 </div>

@@ -3,6 +3,7 @@ import { computed, Signal } from '@angular/core';
 export type FormOption<T = string> = {
   value: T;
   label: string;
+  icon?: string;
 };
 
 export function toFormOptions<I, O extends string | number>(

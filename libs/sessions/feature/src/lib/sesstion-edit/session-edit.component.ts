@@ -6,6 +6,7 @@ import { CreateSessionInput, RollStateService } from '@expose/data-access';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
+import { toFormOptionsComputed } from '@expose/util';
 import { format } from 'date-fns';
 
 type SessionForm = {
@@ -41,11 +42,10 @@ export class SessionEditComponent implements OnInit {
     notes: [''],
   });
 
-  public readonly rollOptions = computed(() =>
-    this.rollStateService.rolls().map((roll) => ({
-      label: `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
-      value: roll.id,
-    })),
+  public readonly rollOptions = toFormOptionsComputed(
+    this.rollStateService.rolls,
+    (roll) => roll.id,
+    (roll) => `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
   );
 
   public ngOnInit(): void {

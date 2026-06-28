@@ -1,7 +1,17 @@
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Aperture, apertureOptions, IsoValue, LightCondition, Photo, RollStateService, ShutterSpeed } from '@expose/data-access';
+import {
+  Aperture,
+  apertureOptions,
+  isoOptions,
+  IsoValue,
+  LightCondition,
+  Photo,
+  RollStateService,
+  ShutterSpeed,
+  shutterSpeedOptions,
+} from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
@@ -39,7 +49,7 @@ export class PhotoEditComponent implements OnInit {
   public photoForm: FormGroup<PhotoForm> = this.fb.group({
     subject: ['', [Validators.required]],
     aperture: [null as Aperture | null, [Validators.required]],
-    shutterSpeed: ['auto'],
+    shutterSpeed: ['auto' as ShutterSpeed],
     iso: [200 as IsoValue],
     lightCondition: ['' as LightCondition],
     frameNumber: [''],
@@ -48,9 +58,19 @@ export class PhotoEditComponent implements OnInit {
   });
 
   public apertureFormOptions = toFormOptions(
-    apertureOptions,
+    [...apertureOptions],
     (v) => v,
     (v) => `f/${v}`,
+  );
+  public shutterSpeedOptions = toFormOptions(
+    [...shutterSpeedOptions],
+    (v) => v,
+    (v) => v,
+  );
+  public isoOptions = toFormOptions(
+    [...isoOptions],
+    (v) => v,
+    (v) => v.toString(),
   );
 
   public ngOnInit(): void {

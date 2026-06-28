@@ -9,7 +9,7 @@ import { Aperture, IsoValue, LightCondition, ShutterSpeed } from './shared.model
  * This is the core model of the application.
  */
 export type Photo = {
-  id: string;
+  id?: string;
 
   /**
    * Reference to the session this photo belongs to.
@@ -29,10 +29,6 @@ export type Photo = {
    */
   frameNumber?: string;
 
-  // -------------------------------------------------------------------------
-  // Exposure settings
-  // -------------------------------------------------------------------------
-
   /** Aperture (f-stop), e.g. 2.8, 5.6, 11. */
   aperture: Aperture;
 
@@ -47,10 +43,6 @@ export type Photo = {
 
   /** Focal length in millimeters, e.g. 50, 85, 135. */
   focalLength?: number;
-
-  // -------------------------------------------------------------------------
-  // Situation
-  // -------------------------------------------------------------------------
 
   /** Light conditions at the time of shooting. */
   lightCondition?: LightCondition;
