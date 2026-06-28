@@ -6,16 +6,11 @@ export type FormOption<T = string> = {
   icon?: string;
 };
 
-export function toFormOptions<I, O extends string | number>(
-  items: I[],
-  valueFn: (item: I) => O,
-  labelFn: (item: I) => string,
-): FormOption<O>[] {
-  return items.map((item) => ({
-    label: labelFn(item),
-    value: valueFn(item),
-  }));
-}
+export type FormOptionsParams<I, O extends string | number> = {
+  valueFn: (item: I) => O;
+  labelFn: (item: I) => string;
+  iconFn?: (item: I) => string;
+};
 
 /**
  * Returns an computed signal with a mapped FormOption array as value.
@@ -23,8 +18,22 @@ export function toFormOptions<I, O extends string | number>(
  */
 export function toFormOptionsComputed<I, O extends string | number>(
   items: Signal<I[]>,
-  valueFn: (item: I) => O,
-  labelFn: (item: I) => string,
-) {
-  return computed(() => toFormOptions(items(), valueFn, labelFn));
+  params: FormOptionsParams<I, O>,
+): Signal<FormOption<O>[]> {
+  return computed(() => toFormOptions(items(), params));
+}
+
+/**
+ * Returns an array of FormOptions for form controls with pre-defined options.
+ * Takes an array of type I as input
+ * @param items
+ * @param params
+ * @returns
+ */
+export function toFormOptions<I, O extends string | number>(items: I[], params: FormOptionsParams<I, O>): FormOption<O>[] {
+  return items.map((item) => ({
+    label: params.labelFn(item),
+    value: params.valueFn(item),
+    icon: params.iconFn ? params.iconFn(item) : undefined,
+  }));
 }

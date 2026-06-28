@@ -49,29 +49,27 @@ export class PhotoEditComponent implements OnInit {
   public photoForm: FormGroup<PhotoForm> = this.fb.group({
     subject: ['', [Validators.required]],
     aperture: [null as Aperture | null, [Validators.required]],
-    shutterSpeed: ['auto' as ShutterSpeed],
-    iso: [200 as IsoValue],
-    lightCondition: ['' as LightCondition],
-    frameNumber: [''],
+    shutterSpeed: [null as ShutterSpeed | null, [Validators.required]],
+    iso: [null as IsoValue | null, [Validators.required]],
+    lightCondition: ['' as LightCondition, [Validators.required]],
+    frameNumber: ['', [Validators.required]],
     notes: [''],
-    rollId: [''],
+    rollId: ['', [Validators.required]],
   });
 
-  public apertureFormOptions = toFormOptions(
-    [...apertureOptions],
-    (v) => v,
-    (v) => `f/${v}`,
-  );
-  public shutterSpeedOptions = toFormOptions(
-    [...shutterSpeedOptions],
-    (v) => v,
-    (v) => v,
-  );
-  public isoOptions = toFormOptions(
-    [...isoOptions],
-    (v) => v,
-    (v) => v.toString(),
-  );
+  public apertureFormOptions = toFormOptions([...apertureOptions], {
+    valueFn: (v) => v,
+    labelFn: (v) => `f/${v}`,
+  });
+  public shutterSpeedOptions = toFormOptions([...shutterSpeedOptions], {
+    valueFn: (v) => v,
+    labelFn: (v) => v,
+  });
+  public isoOptions = toFormOptions([...isoOptions], {
+    valueFn: (v) => v,
+
+    labelFn: (v) => v.toString(),
+  });
 
   public ngOnInit(): void {
     this.photoStateService.loadAll();

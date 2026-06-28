@@ -6,7 +6,6 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  forwardRef,
   inject,
   Injector,
   input,
@@ -15,13 +14,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, TouchedChangeEvent } from '@angular/forms';
-import { filter } from 'rxjs';
-
-export type ScrollPickerOption = {
-  value: string | number;
-  label: string;
-};
+import { FormControl, TouchedChangeEvent } from '@angular/forms';
+import { FormOption } from '@expose/util';
 
 @Component({
   selector: 'lib-scroll-picker',
@@ -29,21 +23,14 @@ export type ScrollPickerOption = {
   templateUrl: './scroll-picker.component.html',
   styleUrl: './scroll-picker.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScrollPicker),
-      multi: true,
-    },
-  ],
 })
-export class ScrollPicker implements ControlValueAccessor, OnInit, AfterViewInit {
+export class ScrollPicker implements OnInit, AfterViewInit {
   private readonly injector = inject(Injector);
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdRef = inject(ChangeDetectorRef);
 
   public readonly control = input.required<FormControl<unknown>>();
-  public readonly options = input.required<ScrollPickerOption[]>();
+  public readonly options = input.required<FormOption[]>();
   public readonly label = input<string>('');
 
   public readonly scrollRef = viewChild<ElementRef>('scrollRef');
@@ -51,26 +38,23 @@ export class ScrollPicker implements ControlValueAccessor, OnInit, AfterViewInit
   public readonly showLeftFade = signal(false);
   public readonly showRightFade = signal(false);
 
-  /** Internally tracked selected value, kept in sync with the form control. */
-  public readonly value = signal<string | number | null>(null);
-
-  /** Whether the form control is disabled. */
-  public readonly isDisabled = signal(false);
-
   public readonly isTouched = signal(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private _onChange: (value: string | number | null) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private _onTouched: () => void = () => {};
+  protected readonly value = signal<unknown>(null);
 
   ngOnInit(): void {
+    this.value.set(this.control().value);
+
     this.control()
-      .events.pipe(
-        filter((ev) => ev instanceof TouchedChangeEvent),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(() => this.cdRef.markForCheck());
+      .events.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((ev) => {
+        if (ev instanceof TouchedChangeEvent) {
+          this.isTouched.set(true);
+        }
+
+        this.value.set(this.control().value);
+        this.cdRef.markForCheck();
+      });
   }
 
   public ngAfterViewInit(): void {
@@ -87,42 +71,11 @@ export class ScrollPicker implements ControlValueAccessor, OnInit, AfterViewInit
    * Selects an option, updates the internal signal, and notifies the form control.
    */
   public select(val: string | number): void {
-    if (this.isDisabled()) return;
+    if (this.control().disabled) return;
 
-    this.value.set(val);
-    this._onChange(val);
-    this._onTouched();
+    this.control().setValue(val);
 
     afterNextRender(() => this.scrollToActive(), { injector: this.injector });
-  }
-
-  /**
-   * Called by Angular forms when the model value changes externally.
-   */
-  public writeValue(value: string | number | null): void {
-    this.value.set(value ?? null);
-    afterNextRender(() => this.scrollToActive(), { injector: this.injector });
-  }
-
-  /**
-   * Registers the onChange callback provided by Angular forms.
-   */
-  public registerOnChange(fn: (value: string | number | null) => void): void {
-    this._onChange = fn;
-  }
-
-  /**
-   * Registers the onTouched callback provided by Angular forms.
-   */
-  public registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
-  }
-
-  /**
-   * Called by Angular forms when the disabled state changes.
-   */
-  public setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
   }
 
   private updateScrollFades(el: HTMLElement): void {

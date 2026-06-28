@@ -42,11 +42,10 @@ export class SessionEditComponent implements OnInit {
     notes: [''],
   });
 
-  public readonly rollOptions = toFormOptionsComputed(
-    this.rollStateService.rolls,
-    (roll) => roll.id,
-    (roll) => `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
-  );
+  public readonly rollOptions = toFormOptionsComputed(this.rollStateService.rolls, {
+    valueFn: (roll) => roll.id,
+    labelFn: (roll) => `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
+  });
 
   public ngOnInit(): void {
     this.rollStateService.loadAll();
