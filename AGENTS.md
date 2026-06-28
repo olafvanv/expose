@@ -17,12 +17,28 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 
 ## Structure
 
-- `apps/web` - Angular frontend application
-- `libs/*` - Shared libraries
-  - `libs/ui` - UI components
-  - `libs/data-access` - Data access layers
-  - `libs/utils` - Utility functions
-  - `libs/features` - Application features
+Libraries are organized by domain. Each domain can contain the following library types:
+
+- `libs/shared/` - Cross-domain shared libraries
+  - `libs/shared/data-access` — shared models, base services, and the IndexedDB setup (`@expose/data-access`)
+  - `libs/shared/shell/data-access` — `HeaderService` and other shell-level services (`@expose/shell-data-access`)
+  - `libs/shared/ui/components/form-fields` — shared form components: `TextInputComponent`, `SelectInputComponent`, `ScrollPicker` (`@expose/ui/form-fields`)
+  - `libs/shared/ui/components/empty-state` — shared empty state component (`@expose/ui/empty-state`)
+  - `libs/shared/ui/styles` — global SCSS tokens, mixins and base styles (`@expose/ui-styles`)
+  - `libs/shared/util` — shared utility functions and types, e.g. `toFormOptions` (`@expose/util`)
+- `libs/photos/` — Photos domain
+  - `libs/photos/data-access` — `PhotoStateService` (`@expose/photos/data-access`)
+  - `libs/photos/feature` — photo list, photo-detail and photo-edit pages (`@expose/photos/feature`)
+- `libs/rolls/` — Rolls domain
+  - `libs/rolls/data-access` — `RollStateService` (`@expose/rolls/data-access`)
+  - `libs/rolls/feature` — rolls list and roll-edit pages (`@expose/rolls/feature`)
+- `libs/sessions/` — Sessions domain
+  - `libs/sessions/data-access` — `SessionStateService` (`@expose/sessions/data-access`)
+  - `libs/sessions/feature` — sessions list, session-detail and session-edit pages (`@expose/sessions/feature`)
+- `libs/settings/` — Settings domain
+  - `libs/settings/data-access` — `SettingsStateService` (`@expose/settings/data-access`)
+  - `libs/settings/feature` — settings page (`@expose/settings/feature`)
+- `apps/web` — Angular frontend application (shell, routing)
 
 ## Conventions
 
@@ -44,4 +60,7 @@ In the future I would like to add the ability to calculate settings (perhaps wit
 - All private variables should start with an underscore, except for the injects.
 - Always nest SCSS selectors.
 - Always place private injects at the top of the class.
-- Never import the CommonModule
+- Never import the `CommonModule`
+- Use typed `FormGroup<T>` instead of the untyped `FormGroup` where possible
+- Use `toFormOptions()` or `toFormOptionsComputed()` from `@expose/util` to map arrays to `FormOption[]` for use in form controls
+- Route parameters passed as Angular inputs use `input<string | null>(null)` — do not use `ActivatedRoute.snapshot` when an input signal is available
