@@ -14,7 +14,7 @@ import {
 } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { GridPicker, ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
+import { CounterComponent, GridPicker, ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
 import { toFormOptions } from '@expose/util';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -53,7 +53,7 @@ const lightConditionOptions = [
 ];
 
 @Component({
-  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker, GridPicker],
+  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker, GridPicker, CounterComponent],
   selector: 'lib-photo-edit',
   templateUrl: './photo-edit.component.html',
   styleUrl: './photo-edit.component.scss',

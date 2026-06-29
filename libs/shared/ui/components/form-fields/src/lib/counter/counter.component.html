@@ -1,0 +1,25 @@
+<div
+  class="counter-container"
+  [class.has-error]="isTouched() && control().invalid">
+  @if (label()) {
+    <label class="form-label">{{ label() }}</label>
+  }
+
+  <div class="counter-input">
+    <button
+      type="button"
+      class="counter-button subtract"
+      (click)="subtract()">
+      <ng-icon name="lucideMinus" />
+    </button>
+
+    <span class="counter-value">{{ value() }}</span>
+
+    <button
+      type="button"
+      class="counter-button add"
+      (click)="add()">
+      <ng-icon name="lucidePlus" />
+    </button>
+  </div>
+</div>

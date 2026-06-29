@@ -1,6 +1,7 @@
 .photo-form-container {
   max-width: var(--content-width-md, 600px);
   margin: 0 auto;
+  padding: 0 0 var(--space-lg);
 
   .photo-form {
     display: flex;
