@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { CreateRollInput, Roll, UpdateRollInput } from '../models/roll.model';
 import { RollDataService } from './roll-data.service';
 
@@ -14,13 +14,6 @@ export class RollStateService {
   private readonly _loading = signal<boolean>(false);
 
   public readonly rolls = this._rolls.asReadonly();
-  /** All available rolls as options for a select */
-  public readonly rollOptions = computed(() =>
-    this.rolls().map((roll) => ({
-      label: `${roll.brand} ${roll.name} (ISO ${roll.iso})`,
-      value: roll.id,
-    })),
-  );
   public readonly loading = this._loading.asReadonly();
 
   /**

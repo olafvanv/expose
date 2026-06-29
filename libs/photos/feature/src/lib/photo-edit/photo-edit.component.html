@@ -34,5 +34,15 @@
       [control]="photoForm.controls.frameNumber"
       label="Framenumber"
       [options]="{ min: 1, max: 36, steps: 1 }" />
+
+    <lib-select-input
+      [control]="photoForm.controls.rollId"
+      label="Roll"
+      [options]="rollOptions()" />
+
+    <lib-select-input
+      [control]="photoForm.controls.sessionId"
+      label="Session"
+      [options]="sessionOptions()" />
   </form>
 </div>

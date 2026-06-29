@@ -13,9 +13,10 @@ import {
   shutterSpeedOptions,
 } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
+import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
-import { CounterComponent, GridPicker, ScrollPicker, TextInputComponent } from '@expose/ui/form-fields';
-import { toFormOptions } from '@expose/util';
+import { CounterComponent, GridPicker, ScrollPicker, SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
+import { toFormOptions, toFormOptionsComputed } from '@expose/util';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideCloud,
@@ -38,6 +39,7 @@ type PhotoForm = {
   frameNumber: FormControl<string | null>;
   notes: FormControl<string | null>;
   rollId: FormControl<string | null>;
+  sessionId: FormControl<string | null>;
 };
 
 const lightConditionOptions = [
@@ -53,7 +55,7 @@ const lightConditionOptions = [
 ];
 
 @Component({
-  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker, GridPicker, CounterComponent],
+  imports: [ReactiveFormsModule, TextInputComponent, ScrollPicker, GridPicker, CounterComponent, SelectInputComponent],
   selector: 'lib-photo-edit',
   templateUrl: './photo-edit.component.html',
   styleUrl: './photo-edit.component.scss',
@@ -77,10 +79,10 @@ export class PhotoEditComponent implements OnInit {
   private readonly photoStateService = inject(PhotoStateService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  private readonly sessionStateService = inject(SessionStateService);
 
   // Route param :id
   public id = input<string | null>(null);
-  public rollOptions = this.rollStateService.rollOptions;
   public isEditMode = computed(() => !!this.id());
 
   public photoForm: FormGroup<PhotoForm> = this.fb.group({
@@ -92,6 +94,7 @@ export class PhotoEditComponent implements OnInit {
     frameNumber: ['', [Validators.required]],
     notes: [''],
     rollId: ['', [Validators.required]],
+    sessionId: [null as string | null],
   });
 
   public apertureFormOptions = toFormOptions([...apertureOptions], {
@@ -107,11 +110,18 @@ export class PhotoEditComponent implements OnInit {
 
     labelFn: (v) => v.toString(),
   });
-
   public lightConditionOptions = toFormOptions([...lightConditionOptions], {
     valueFn: (v) => v.value,
     labelFn: (v) => v.label,
     iconFn: (v) => v.icon,
+  });
+  public rollOptions = toFormOptionsComputed(this.rollStateService.rolls, {
+    valueFn: (roll) => roll.id,
+    labelFn: (roll) => roll.name,
+  });
+  public sessionOptions = toFormOptionsComputed(this.sessionStateService.sessions, {
+    valueFn: (session) => session.id,
+    labelFn: (session) => session.title,
   });
 
   public ngOnInit(): void {
