@@ -42,7 +42,7 @@ export class CounterComponent implements OnInit {
     if (this.control().value) {
       this.value.set(this.control().value ?? this.min());
     } else {
-      this.value.set(this.min());
+      this.control().setValue(this.min());
     }
 
     this.control()
