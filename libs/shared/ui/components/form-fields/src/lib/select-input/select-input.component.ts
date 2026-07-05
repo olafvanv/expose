@@ -32,7 +32,7 @@ import { take } from 'rxjs';
     }),
   ],
 })
-export class SelectInputComponent implements OnInit {
+export class SelectInputComponent<T extends number | string> implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly cdRef = inject(ChangeDetectorRef);
   private readonly overlay = inject(Overlay);
@@ -40,7 +40,7 @@ export class SelectInputComponent implements OnInit {
 
   public control = input.required<FormControl<string | number | null>>();
   public label = input.required<string>();
-  public options = input.required<FormOption[]>();
+  public options = input.required<FormOption<T>[]>();
   public placeholder = input<string>();
   public id = input<string>();
 

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FilmFormat, RollStateService } from '@expose/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { SelectInputComponent, TextInputComponent } from '@expose/ui/form-fields';
+import { FormOption, toFormOptions } from '@expose/util';
 
 // =============================================================================
 // RollEditComponent
@@ -27,12 +28,12 @@ export class RollEditComponent implements OnInit {
   public isEditMode = false;
   public rollId: string | null = null;
   public readonly formatOptions: FilmFormat[] = ['35mm', '120', '4x5', '8x10'];
-  public readonly isoOptions: number[] = [25, 50, 64, 100, 125, 160, 200, 400, 800, 1600, 3200, 6400];
+  public readonly isoValues: number[] = [25, 50, 64, 100, 125, 160, 200, 400, 800, 1600, 3200, 6400];
 
-  public readonly isoSelectOptions = this.isoOptions.map((opt) => ({
-    label: `ISO ${opt}`,
-    value: opt,
-  }));
+  public readonly isoOptions: FormOption<number>[] = toFormOptions(this.isoValues, {
+    valueFn: (iso) => iso,
+    labelFn: (iso) => iso.toString(),
+  });
 
   public get brandControl(): FormControl {
     return this.rollForm.get('brand') as FormControl;
