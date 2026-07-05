@@ -1,4 +1,6 @@
-<div class="form-field">
+<div
+  class="form-field"
+  [class.has-error]="control().touched && control().invalid">
   <label
     [for]="computedId()"
     class="form-label">

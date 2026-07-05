@@ -10,6 +10,20 @@
   flex-direction: column;
   gap: var(--space-xs);
 
+  &.has-error {
+    .form-label {
+      color: var(--color-error, #ef4444);
+    }
+
+    .trigger-btn {
+      border-color: var(--color-error, #ef4444);
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+      }
+    }
+  }
+
   .form-label {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);

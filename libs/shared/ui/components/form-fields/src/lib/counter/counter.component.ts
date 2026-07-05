@@ -40,7 +40,9 @@ export class CounterComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.control().value) {
-      this.value.set(this.control().value ?? 0);
+      this.value.set(this.control().value ?? this.min());
+    } else {
+      this.value.set(this.min());
     }
 
     this.control()

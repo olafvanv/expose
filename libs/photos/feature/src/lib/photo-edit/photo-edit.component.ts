@@ -133,8 +133,6 @@ export class PhotoEditComponent implements OnInit {
   public async onSave() {
     if (this.photoForm.invalid) {
       this.photoForm.markAllAsTouched();
-
-      console.log(this.photoForm);
       return;
     }
 
@@ -151,7 +149,7 @@ export class PhotoEditComponent implements OnInit {
 
   private setupHeader() {
     this.headerService.setConfig({
-      title: '',
+      title: this.isEditMode() ? 'Edit Photo' : 'New Photo',
       showBackButton: true,
       backAction: () => this.router.navigate(['/rolls']),
       actionButtons: [
