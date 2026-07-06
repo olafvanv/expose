@@ -22,7 +22,7 @@ import { TextInputType } from './text-input.types';
   ],
 })
 export class TextInputComponent {
-  public control = input.required<FormControl<string | null>>();
+  public control = input.required<FormControl<string | number | Date | null>>();
   public label = input.required<string>();
   public placeholder = input<string>('');
   public type = input<TextInputType>('text');

@@ -1,1 +1,101 @@
-<p>Photos list placeholder</p>
+<div class="photos-container">
+  <!-- Loading state -->
+  @if (photoStateService.loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading photos...</p>
+    </div>
+  } @else {
+    <div class="photos-grid">
+      @for (photo of photosWithMetadata(); track photo.id) {
+        <div class="photo-card">
+          <div class="photo-card__header">
+            <h3 class="photo-card__subject">{{ photo.subject }}</h3>
+            @if (photo.frameNumber !== null && photo.frameNumber !== '') {
+              <span class="badge badge--frame">#{{ photo.frameNumber }}</span>
+            }
+          </div>
+
+          <div class="photo-card__settings">
+            <div class="setting-pill">
+              <span class="setting-label">f/</span>
+              <span class="setting-value">{{ photo.aperture }}</span>
+            </div>
+            <div class="setting-pill">
+              <span class="setting-label">SS-</span>
+              <span class="setting-value">{{ photo.shutterSpeed }}</span>
+            </div>
+            <div class="setting-pill">
+              <span class="setting-label">ISO</span>
+              <span class="setting-value">{{ photo.iso }}</span>
+            </div>
+          </div>
+
+          <div class="photo-card__details">
+            @if (photo.roll) {
+              <div class="detail-item">
+                <ng-icon
+                  name="lucideFilm"
+                  class="detail-icon"></ng-icon>
+                <span class="detail-text">{{ photo.roll.brand }} {{ photo.roll.name }}</span>
+              </div>
+            }
+            @if (photo.session) {
+              <div class="detail-item">
+                <ng-icon
+                  name="lucideCamera"
+                  class="detail-icon"></ng-icon>
+                <span class="detail-text">{{ photo.session.title }}</span>
+              </div>
+            }
+            <div class="detail-item">
+              <ng-icon
+                name="lucideCalendar"
+                class="detail-icon"></ng-icon>
+              <span class="detail-text">{{ photo.takenAt | date: 'dd MMM yyyy, HH:mm' }}</span>
+            </div>
+          </div>
+
+          @if (photo.notes) {
+            <div class="photo-card__notes">
+              <ng-icon
+                name="lucideInfo"
+                class="notes-icon"></ng-icon>
+              <p class="notes-text">{{ photo.notes }}</p>
+            </div>
+          }
+
+          <div class="photo-card__footer">
+            <span class="badge badge--light-condition">
+              <ng-icon
+                [name]="getLightConditionIcon(photo.lightCondition)"
+                class="badge-icon"></ng-icon>
+              <span>{{ getLightConditionLabel(photo.lightCondition) }}</span>
+            </span>
+
+            <div class="photo-card__actions">
+              <button
+                class="action-btn action-btn--edit"
+                (click)="onEdit(photo.id!, $event)"
+                aria-label="Edit photo">
+                <ng-icon name="lucideEdit3"></ng-icon>
+              </button>
+              <button
+                class="action-btn action-btn--delete"
+                (click)="onDelete(photo.id!, $event)"
+                aria-label="Delete photo">
+                <ng-icon name="lucideTrash2"></ng-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <lib-empty-state
+          icon="lucideCamera"
+          title="No photos logged yet"
+          message="Keep track of your camera settings, film roll, light condition, and notes for every photo you take."
+          [button]="{ icon: 'lucidePlus', label: 'Log Photo', path: 'new' }" />
+      }
+    </div>
+  }
+</div>

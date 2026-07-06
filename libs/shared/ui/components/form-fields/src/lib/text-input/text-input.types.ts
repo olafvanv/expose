@@ -1,1 +1,1 @@
-export type TextInputType = 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'number' | 'date';
+export type TextInputType = 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'number' | 'date' | 'datetime-local';

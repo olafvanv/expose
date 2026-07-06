@@ -7,6 +7,11 @@
       label="Subject"
       [control]="photoForm.controls.subject" />
 
+    <lib-text-input
+      label="Taken at"
+      type="datetime-local"
+      [control]="photoForm.controls.takenAt" />
+
     <div class="form-subheader">Exposure</div>
 
     <lib-scroll-picker

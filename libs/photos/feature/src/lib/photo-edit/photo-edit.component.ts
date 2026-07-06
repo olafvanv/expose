@@ -29,9 +29,11 @@ import {
   lucideSunset,
   lucideTrees,
 } from '@ng-icons/lucide';
+import { format } from 'date-fns';
 
 type PhotoForm = {
   subject: FormControl<string | null>;
+  takenAt: FormControl<string | null>;
   aperture: FormControl<Aperture | null>;
   shutterSpeed: FormControl<ShutterSpeed | null>;
   iso: FormControl<IsoValue | null>;
@@ -87,6 +89,7 @@ export class PhotoEditComponent implements OnInit {
 
   public photoForm: FormGroup<PhotoForm> = this.fb.group({
     subject: ['', [Validators.required]],
+    takenAt: [format(new Date(), 'yyyy-MM-dd HH:mm'), [Validators.required]],
     aperture: [null as Aperture | null, [Validators.required]],
     shutterSpeed: [null as ShutterSpeed | null, [Validators.required]],
     iso: [null as IsoValue | null, [Validators.required]],
@@ -136,7 +139,9 @@ export class PhotoEditComponent implements OnInit {
       return;
     }
 
-    const formVal = this.photoForm.value as Photo;
+    const formVal = {
+      ...this.photoForm.value,
+    } as Photo;
 
     if (this.isEditMode()) {
       await this.photoStateService.updatePhoto(this.id() as string, formVal);

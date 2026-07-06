@@ -15,7 +15,7 @@
       [placeholder]="placeholder()"
       class="form-input" />
 
-    @if (!!control().value) {
+    @if (!!control().value && type() !== 'date' && type() !== 'datetime-local') {
       <button
         type="button"
         class="clear-button"
