@@ -4,7 +4,7 @@
   "sourceRoot": "libs/settings/feature/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "scope:settings"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"

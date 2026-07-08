@@ -4,7 +4,7 @@
   "sourceRoot": "libs/shared/ui/components/empty-state/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:ui", "scope:shared"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"

@@ -4,7 +4,7 @@
   "sourceRoot": "libs/photos/feature/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "scope:photos"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"

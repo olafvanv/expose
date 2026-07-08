@@ -4,7 +4,7 @@
   "sourceRoot": "libs/settings/data-access/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:data-access", "scope:settings"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
