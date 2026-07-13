@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +11,7 @@ import { lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
   selector: 'lib-settings',
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, SelectInputComponent, NgIconComponent],
+  imports: [ReactiveFormsModule, SelectInputComponent, NgIconComponent],
   providers: [
     provideIcons({
       lucideSun,

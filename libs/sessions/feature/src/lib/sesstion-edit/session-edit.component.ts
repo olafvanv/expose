@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +20,7 @@ type SessionForm = {
   selector: 'lib-session-edit',
   templateUrl: './session-edit.component.html',
   styleUrl: './session-edit.component.scss',
-  imports: [CommonModule, ReactiveFormsModule, TextInputComponent, SelectInputComponent],
+  imports: [ReactiveFormsModule, TextInputComponent, SelectInputComponent],
 })
 export class SessionEditComponent implements OnInit {
   private readonly headerService = inject(HeaderService);

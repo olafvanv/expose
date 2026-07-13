@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RollStateService } from '@expose/data-access';
@@ -12,7 +11,7 @@ import { EmptyState } from '@expose/ui/empty-state';
   selector: 'lib-photos',
   templateUrl: './photos.component.html',
   styleUrl: './photos.component.scss',
-  imports: [CommonModule, EmptyState, PhotoCardComponent],
+  imports: [EmptyState, PhotoCardComponent],
 })
 export class PhotosComponent implements OnInit {
   public readonly photoStateService = inject(PhotoStateService);

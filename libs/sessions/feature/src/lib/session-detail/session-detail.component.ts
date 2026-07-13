@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RollStateService } from '@expose/data-access';
@@ -9,17 +9,11 @@ import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideCalendar, lucideCamera, lucideFilm, lucideMapPin, lucidePlus } from '@ng-icons/lucide';
 
-// =============================================================================
-// SessionDetailComponent
-// Detail page for a single session: shows session metadata and its photos
-// as a compact list with camera settings.
-// =============================================================================
-
 @Component({
   selector: 'lib-session-detail',
   templateUrl: './session-detail.component.html',
   styleUrl: './session-detail.component.scss',
-  imports: [CommonModule, NgIconComponent, PhotoCardComponent],
+  imports: [NgIconComponent, PhotoCardComponent, DatePipe],
   providers: [
     provideIcons({
       lucideCamera,

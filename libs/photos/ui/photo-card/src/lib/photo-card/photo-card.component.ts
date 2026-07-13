@@ -9,13 +9,6 @@ export type PhotoWithMetadata = Photo & {
   session?: Session;
 };
 
-// =============================================================================
-// PhotoCardComponent
-// Reusable component representing a single photo frame. Displays camera
-// settings, roll (associated with frame), session, date, and frame number.
-// Uses input flags to dynamically hide elements based on parent context.
-// =============================================================================
-
 @Component({
   selector: 'lib-photo-card',
   templateUrl: './photo-card.component.html',
