@@ -1,8 +1,7 @@
 @use 'scss/mixins' as m;
 
 // =============================================================================
-// Photos Overview Styling
-// Glassmorphic cards, camera setting pills, metadata badges, and hover actions.
+// Photos Overview Container & Grid Styling
 // =============================================================================
 
 .photos-container {
@@ -40,7 +39,7 @@
 }
 
 // -----------------------------------------------------------------------------
-// Photos Grid & Cards
+// Photos Grid
 // -----------------------------------------------------------------------------
 .photos-grid {
   display: grid;
@@ -48,225 +47,11 @@
   gap: var(--space-md);
   padding: var(--space-xs) 0;
 
-  @media (min-width: 640px) {
+  @include m.tablet {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @include m.desktop {
     grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.photo-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-md);
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  box-sizing: border-box;
-  transition:
-    transform var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-
-  @supports (backdrop-filter: blur(1px)) {
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    border: var(--glass-border);
-  }
-
-  @include m.hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-border-strong);
-  }
-}
-
-.photo-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
-}
-
-.photo-card__subject {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  margin: 0;
-  line-height: var(--line-height-tight);
-}
-
-// -----------------------------------------------------------------------------
-// Camera Settings Bar (Pills)
-// -----------------------------------------------------------------------------
-.photo-card__settings {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-md);
-}
-
-.setting-pill {
-  display: inline-flex;
-  align-items: baseline;
-  padding: 4px var(--space-sm);
-  background-color: var(--color-bg-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
-
-  .setting-label {
-    color: var(--color-text-muted);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .setting-value {
-    color: var(--color-text-primary);
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Details & Meta Info
-// -----------------------------------------------------------------------------
-.photo-card__details {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: var(--space-md);
-  flex-grow: 1;
-}
-
-.detail-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-
-  .detail-icon {
-    font-size: 14px;
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-  }
-
-  .detail-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Badges
-// -----------------------------------------------------------------------------
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius-sm);
-
-  &--frame {
-    background-color: var(--color-accent-subtle);
-    color: var(--color-accent);
-    border-radius: var(--radius-full);
-    font-variant-numeric: tabular-nums;
-  }
-
-  &--light-condition {
-    background-color: var(--color-bg-subtle);
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    gap: var(--space-xs);
-    padding: 4px 10px;
-
-    .badge-icon {
-      font-size: 12px;
-      color: var(--color-text-muted);
-    }
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Notes
-// -----------------------------------------------------------------------------
-.photo-card__notes {
-  display: flex;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-md);
-  padding: var(--space-xs) var(--space-sm);
-  background-color: var(--color-bg-subtle);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-
-  .notes-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: var(--color-text-muted);
-  }
-
-  .notes-text {
-    margin: 0;
-    font-style: italic;
-    line-height: var(--line-height-normal);
-    color: var(--color-text-secondary);
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Footer & Actions
-// -----------------------------------------------------------------------------
-.photo-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--color-border);
-}
-
-.photo-card__actions {
-  display: flex;
-  gap: var(--space-xs);
-  opacity: 0.8;
-  transition: opacity var(--transition-fast);
-
-  .photo-card:hover & {
-    opacity: 1;
-  }
-}
-
-.action-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast);
-
-  @include m.hover {
-    background-color: var(--color-bg-subtle);
-    color: var(--color-text-primary);
-  }
-
-  &--delete {
-    @include m.hover {
-      background-color: rgba(239, 68, 68, 0.1);
-      color: var(--color-error, #ef4444);
-    }
   }
 }

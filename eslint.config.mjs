@@ -22,7 +22,7 @@ export default [
             },
             {
               sourceTag: 'type:ui',
-              onlyDependOnLibsWithTags: ['type:util', 'type:ui'],
+              onlyDependOnLibsWithTags: ['type:util', 'type:ui', 'type:data-access'],
             },
             {
               sourceTag: 'type:data-access',
@@ -35,6 +35,10 @@ export default [
             {
               sourceTag: 'scope:shared',
               onlyDependOnLibsWithTags: ['scope:shared']
+            },
+            {
+              sourceTag: 'scope:app',
+              onlyDependOnLibsWithTags: ['type:feature', 'type:data-access', 'type:ui', 'type:util', 'scope:shared', 'scope:app']
             }
           ],
         },

@@ -1,0 +1,84 @@
+<div class="photo-card">
+  <!-- Left Side: Photo Image/Placeholder -->
+  <div class="photo-card__media" aria-hidden="true">
+    <ng-icon name="lucideImage" class="media-placeholder-icon"></ng-icon>
+  </div>
+
+  <!-- Right Side: Details Content -->
+  <div class="photo-card__content">
+    
+    <!-- Row 1: Date/Time (left) & Frame Number (right) -->
+    <div class="photo-card__top-row">
+      <time class="photo-card__date" [dateTime]="photo().takenAt">
+        {{ photo().takenAt | date: 'dd MMM yyyy, HH:mm' }}
+      </time>
+      @if (photo().frameNumber !== null && photo().frameNumber !== '') {
+        <span class="photo-card__frame">#{{ photo().frameNumber }}</span>
+      }
+    </div>
+
+    <!-- Row 2: Title (Subject) -->
+    <h3 class="photo-card__title">{{ photo().subject }}</h3>
+
+    <!-- Row 3: Settings Chips -->
+    <div class="photo-card__chips">
+      <span class="setting-chip setting-chip--aperture">
+        <span class="chip-label">f/</span>{{ photo().aperture }}
+      </span>
+      <span class="setting-chip setting-chip--shutter">
+        {{ photo().shutterSpeed }}s
+      </span>
+      <span class="setting-chip setting-chip--iso">
+        ISO {{ photo().iso }}
+      </span>
+      @if (photo().focalLength) {
+        <span class="setting-chip setting-chip--focal">
+          {{ photo().focalLength }}mm
+        </span>
+      }
+    </div>
+
+    <!-- Divider Line -->
+    <hr class="photo-card__divider" />
+
+    <!-- Row 4 (Below Divider): Metadata & Actions -->
+    <div class="photo-card__bottom-row">
+      <div class="photo-card__metadata">
+        <!-- Film Roll -->
+        @if (showRoll() && photo().roll; as roll) {
+          <span class="meta-badge" [title]="roll.brand + ' ' + roll.name">
+            <ng-icon name="lucideFilm" class="meta-icon"></ng-icon>
+            <span class="meta-label">{{ roll.brand }} {{ roll.name }}</span>
+          </span>
+        }
+
+        <!-- Session -->
+        @if (showSession() && photo().session; as session) {
+          <span class="meta-badge" [title]="session.title">
+            <ng-icon name="lucideCamera" class="meta-icon"></ng-icon>
+            <span class="meta-label">{{ session.title }}</span>
+          </span>
+        }
+      </div>
+
+      <!-- Actions (Edit/Delete) -->
+      @if (showActions()) {
+        <div class="photo-card__actions">
+          <button
+            class="action-btn action-btn--edit"
+            (click)="onEdit($event)"
+            aria-label="Edit photo">
+            <ng-icon name="lucideEdit3"></ng-icon>
+          </button>
+          <button
+            class="action-btn action-btn--delete"
+            (click)="onDelete($event)"
+            aria-label="Delete photo">
+            <ng-icon name="lucideTrash2"></ng-icon>
+          </button>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

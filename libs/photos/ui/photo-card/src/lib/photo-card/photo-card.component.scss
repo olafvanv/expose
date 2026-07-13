@@ -1,0 +1,231 @@
+@use 'scss/mixins' as m;
+
+// =============================================================================
+// PhotoCard Component (Compact Row-based Design)
+// =============================================================================
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.photo-card {
+  display: flex;
+  gap: var(--space-md);
+  padding: 0;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  overflow: hidden;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  @supports (backdrop-filter: blur(1px)) {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+  }
+
+  @include m.hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-strong);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Left: developed photo thumbnail space (Full Height)
+// -----------------------------------------------------------------------------
+.photo-card__media {
+  flex-shrink: 0;
+  width: 80px;
+  align-self: stretch;
+  background-color: var(--color-bg-subtle);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+
+  .media-placeholder-icon {
+    font-size: 24px;
+    opacity: 0.6;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Right: Content area
+// -----------------------------------------------------------------------------
+.photo-card__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0; // Ensures text-overflow ellipsis works
+  padding: var(--space-sm) var(--space-md) var(--space-sm) 0;
+}
+
+.photo-card__top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.photo-card__date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.photo-card__frame {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.photo-card__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 2px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+// -----------------------------------------------------------------------------
+// Camera Settings Chips
+// -----------------------------------------------------------------------------
+.photo-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0;
+}
+
+.setting-chip {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono, monospace);
+
+  .chip-label {
+    opacity: 0.6;
+    font-weight: var(--font-weight-regular);
+  }
+
+  &--aperture {
+    background-color: rgba(20, 184, 166, 0.12);
+  }
+
+  &--shutter {
+    background-color: rgba(14, 165, 233, 0.12);
+  }
+
+  &--iso {
+    background-color: rgba(99, 102, 241, 0.12);
+  }
+
+  &--focal {
+    background-color: rgba(245, 158, 11, 0.12);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Divider
+// -----------------------------------------------------------------------------
+.photo-card__divider {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 6px 0;
+  width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Bottom Row: Metadata details & actions
+// -----------------------------------------------------------------------------
+.photo-card__bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.photo-card__metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  max-width: 140px;
+
+  .meta-icon {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .meta-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.photo-card__actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+
+  .photo-card:hover & {
+    opacity: 1;
+  }
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+
+  @include m.hover {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-primary);
+  }
+
+  &--delete {
+    @include m.hover {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--color-error, #ef4444);
+    }
+  }
+}

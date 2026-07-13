@@ -3,6 +3,7 @@ import { Component, computed, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RollStateService } from '@expose/data-access';
 import { PhotoStateService } from '@expose/photos/data-access';
+import { PhotoCardComponent } from '@expose/photos/ui/photo-card';
 import { SessionStateService } from '@expose/sessions/data-access';
 import { HeaderService } from '@expose/shell-data-access';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -18,7 +19,7 @@ import { lucideCalendar, lucideCamera, lucideFilm, lucideMapPin, lucidePlus } fr
   selector: 'lib-session-detail',
   templateUrl: './session-detail.component.html',
   styleUrl: './session-detail.component.scss',
-  imports: [CommonModule, NgIconComponent],
+  imports: [CommonModule, NgIconComponent, PhotoCardComponent],
   providers: [
     provideIcons({
       lucideCamera,
@@ -48,15 +49,23 @@ export class SessionDetailComponent implements OnInit {
     return rollId ? this._rollStateService.rolls().find((r) => r.id === rollId) : undefined;
   });
 
-  /** Photos belonging to this session, sorted by frame number then takenAt. */
-  public readonly photos = computed(() =>
-    [...this._photoStateService.photos()].sort((a, b) => {
-      if (a.frameNumber != null && b.frameNumber != null) {
-        return Number(a.frameNumber) - Number(b.frameNumber);
-      }
-      return a.takenAt.localeCompare(b.takenAt);
-    }),
-  );
+  /** Photos belonging to this session, enriched with metadata and sorted by frame number then takenAt. */
+  public readonly photosWithMetadata = computed(() => {
+    const rolls = this._rollStateService.rolls();
+    const sessions = this._sessionStateService.sessions();
+    return [...this._photoStateService.photos()]
+      .map((photo) => {
+        const roll = photo.rollId ? rolls.find((r) => r.id === photo.rollId) : undefined;
+        const session = photo.sessionId ? sessions.find((s) => s.id === photo.sessionId) : undefined;
+        return { ...photo, roll, session };
+      })
+      .sort((a, b) => {
+        if (a.frameNumber != null && b.frameNumber != null) {
+          return Number(a.frameNumber) - Number(b.frameNumber);
+        }
+        return a.takenAt.localeCompare(b.takenAt);
+      });
+  });
 
   public ngOnInit(): void {
     this._sessionStateService.loadAll();
@@ -65,6 +74,10 @@ export class SessionDetailComponent implements OnInit {
     this._setupHeader();
   }
 
+  // ---------------------------------------------------------------------------
+  // Public Methods
+  // ---------------------------------------------------------------------------
+
   /**
    * Navigates to the add-photo page, pre-seeding the sessionId via query params.
    */
@@ -72,6 +85,22 @@ export class SessionDetailComponent implements OnInit {
     this._router.navigate(['/photos/new'], {
       queryParams: { sessionId: this._sessionId },
     });
+  }
+
+  /**
+   * Navigates to the edit page for a specific photo.
+   */
+  public onEditPhoto(photoId: string): void {
+    this._router.navigate(['/photos', photoId, 'edit']);
+  }
+
+  /**
+   * Prompts for confirmation and deletes the specified photo.
+   */
+  public async onDeletePhoto(photoId: string): Promise<void> {
+    if (confirm('Are you sure you want to delete this photo?')) {
+      await this._photoStateService.deletePhoto(photoId);
+    }
   }
 
   /**

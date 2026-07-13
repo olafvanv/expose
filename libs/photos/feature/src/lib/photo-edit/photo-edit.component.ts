@@ -156,7 +156,7 @@ export class PhotoEditComponent implements OnInit {
     this.headerService.setConfig({
       title: this.isEditMode() ? 'Edit Photo' : 'New Photo',
       showBackButton: true,
-      backAction: () => this.router.navigate(['/rolls']),
+      backAction: () => history.back(),
       actionButtons: [
         {
           id: 'save-photo',

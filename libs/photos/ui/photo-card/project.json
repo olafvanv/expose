@@ -1,10 +1,10 @@
 {
-  "name": "shell-data-access",
+  "name": "photos-ui-photo-card",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/shell/data-access/src",
+  "sourceRoot": "libs/photos/ui/photo-card/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["type:data-access", "scope:shared"],
+  "tags": ["scope:photos", "type:ui"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"

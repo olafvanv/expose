@@ -1,10 +1,5 @@
-// Shared primitives
-export * from './lib/models/shared.model';
-
-// Models
-export type { CreatePhotoInput, Photo, UpdatePhotoInput } from './lib/models/photo.model';
-export type { CreateRollInput, Roll, UpdateRollInput } from './lib/models/roll.model';
-export type { CreateSessionInput, Session, UpdateSessionInput } from './lib/models/session.model';
+// Models — re-exported from @expose/util for backwards compatibility
+export * from '@expose/util';
 
 // Data services
 export * from './lib/services/base-data.service';
