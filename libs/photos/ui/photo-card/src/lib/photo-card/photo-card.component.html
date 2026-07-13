@@ -1,15 +1,23 @@
-<div class="photo-card">
+<div
+  class="photo-card"
+  (click)="open.emit(photo().id!)"
+  aria-label="photo-card">
   <!-- Left Side: Photo Image/Placeholder -->
-  <div class="photo-card__media" aria-hidden="true">
-    <ng-icon name="lucideImage" class="media-placeholder-icon"></ng-icon>
+  <div
+    class="photo-card__media"
+    aria-hidden="true">
+    <ng-icon
+      name="lucideImage"
+      class="media-placeholder-icon"></ng-icon>
   </div>
 
   <!-- Right Side: Details Content -->
   <div class="photo-card__content">
-    
     <!-- Row 1: Date/Time (left) & Frame Number (right) -->
     <div class="photo-card__top-row">
-      <time class="photo-card__date" [dateTime]="photo().takenAt">
+      <time
+        class="photo-card__date"
+        [dateTime]="photo().takenAt">
         {{ photo().takenAt | date: 'dd MMM yyyy, HH:mm' }}
       </time>
       @if (photo().frameNumber !== null && photo().frameNumber !== '') {
@@ -23,18 +31,13 @@
     <!-- Row 3: Settings Chips -->
     <div class="photo-card__chips">
       <span class="setting-chip setting-chip--aperture">
-        <span class="chip-label">f/</span>{{ photo().aperture }}
+        <span class="chip-label">f/</span>
+        {{ photo().aperture }}
       </span>
-      <span class="setting-chip setting-chip--shutter">
-        {{ photo().shutterSpeed }}s
-      </span>
-      <span class="setting-chip setting-chip--iso">
-        ISO {{ photo().iso }}
-      </span>
+      <span class="setting-chip setting-chip--shutter">{{ photo().shutterSpeed }}s</span>
+      <span class="setting-chip setting-chip--iso">ISO {{ photo().iso }}</span>
       @if (photo().focalLength) {
-        <span class="setting-chip setting-chip--focal">
-          {{ photo().focalLength }}mm
-        </span>
+        <span class="setting-chip setting-chip--focal">{{ photo().focalLength }}mm</span>
       }
     </div>
 
@@ -46,16 +49,24 @@
       <div class="photo-card__metadata">
         <!-- Film Roll -->
         @if (showRoll() && photo().roll; as roll) {
-          <span class="meta-badge" [title]="roll.brand + ' ' + roll.name">
-            <ng-icon name="lucideFilm" class="meta-icon"></ng-icon>
+          <span
+            class="meta-badge"
+            [title]="roll.brand + ' ' + roll.name">
+            <ng-icon
+              name="lucideFilm"
+              class="meta-icon"></ng-icon>
             <span class="meta-label">{{ roll.brand }} {{ roll.name }}</span>
           </span>
         }
 
         <!-- Session -->
         @if (showSession() && photo().session; as session) {
-          <span class="meta-badge" [title]="session.title">
-            <ng-icon name="lucideCamera" class="meta-icon"></ng-icon>
+          <span
+            class="meta-badge"
+            [title]="session.title">
+            <ng-icon
+              name="lucideCamera"
+              class="meta-icon"></ng-icon>
             <span class="meta-label">{{ session.title }}</span>
           </span>
         }
@@ -79,6 +90,5 @@
         </div>
       }
     </div>
-
   </div>
 </div>

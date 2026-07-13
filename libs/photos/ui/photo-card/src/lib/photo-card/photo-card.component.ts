@@ -44,6 +44,8 @@ export class PhotoCardComponent {
   /** Emitted when delete button is clicked. Emits photo ID. */
   public delete = output<string>();
 
+  public open = output<string>();
+
   /**
    * Triggers the edit output event.
    */

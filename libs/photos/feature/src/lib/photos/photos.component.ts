@@ -65,4 +65,8 @@ export class PhotosComponent implements OnInit {
       await this.photoStateService.deletePhoto(id);
     }
   }
+
+  public openDetails(id: string): void {
+    this.router.navigate(['/photos', id]);
+  }
 }

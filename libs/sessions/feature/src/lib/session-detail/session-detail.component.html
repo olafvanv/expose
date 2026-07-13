@@ -66,8 +66,8 @@
               [photo]="photo"
               [showSession]="false"
               (edit)="onEditPhoto($event)"
-              (delete)="onDeletePhoto($event)">
-            </lib-photo-card>
+              (delete)="onDeletePhoto($event)"
+              (open)="openDetails($event)" />
           }
         </div>
       }

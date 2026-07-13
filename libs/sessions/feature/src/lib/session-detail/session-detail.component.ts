@@ -104,6 +104,10 @@ export class SessionDetailComponent implements OnInit {
     this._router.navigate(['/sessions', this._sessionId, 'edit']);
   }
 
+  public openDetails(id: string): void {
+    this._router.navigate(['photos', id]);
+  }
+
   private _setupHeader(): void {
     this._headerService.setConfig({
       title: 'Session',

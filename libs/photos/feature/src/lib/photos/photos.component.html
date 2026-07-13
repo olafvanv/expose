@@ -11,8 +11,8 @@
         <lib-photo-card
           [photo]="photo"
           (edit)="onEdit($event)"
-          (delete)="onDelete($event)">
-        </lib-photo-card>
+          (delete)="onDelete($event)"
+          (open)="openDetails($event)" />
       } @empty {
         <lib-empty-state
           icon="lucideCamera"
